@@ -7,7 +7,7 @@ body{
     color: darkblue;
     margin: 10px 50px 10px 50px;
     width: 950px;
-    background-color: ivory
+    background-color: ivory;
 }
 
 img{
@@ -17,25 +17,25 @@ img{
 .left{
     float:left;
     width: 300px;
-    padding: 1em;
+    padding:1em;
 }
 
 .right{
-    float: right;
-    width: 300px;
-    padding: 1em;
+    float:right;
+    width:300px;
+    padding:1em;
 }
 
 .center{
     margin-left: 300px;
-    margin-right:300px;
-    padding: 1em;
+    margin-right: 300px;
+    padding:1em;
 }
 
 ul{
-    list-style-type: none;
+    list-style-type:none;
     margin: 0;
-    padding: 0;
+    padding:0;
 }
 
 li{
@@ -43,6 +43,6 @@ li{
 }
 
 #navbar a{
-margin-left: 70px;
-margin-right:70px;
+    margin-left:70px;
+    margin-right: 70px;
 }
