@@ -20,7 +20,6 @@
         Hits:<span id="hits_span">0</span>
         Spins:<span id="spins_span">0</span>
         Hit/Spin:<span id="hit_spin_span">0</span>
-        You win:<span id="win_span">pending...</span>
         </p>
         <h1><span style="font-size: 200%;">
         <script> 
@@ -36,18 +35,16 @@
         </header>
 
         <div><main>
-
         <section class="item" 
         onmouseover="
         this.className= 'item rotate';
         spins_span.innerHTML = ++spins;
         hit_spin_span.innerHTML = (Number(hits_span.innerHTML)/Number(spins_span.innerHTML)).toFixed(2);
-        win_span.innerHTML=(spins  <2*hits);"
-
+        // hit_spin_span.innerHTML = (hits / spins)";
 
         onclick="this.className= 'item'
         hit_spin_span.innerHTML = (Number(hits_span.innerHTML)/Number(spins_span.innerHTML)).toFixed(2);
-        // hit_spin_span.innerHTML = (hits / spins)"></section>
+        // hit_spin_span.innerHTML = (hits / spins)">
         <h2>HTC</h2>
         <p>&dollar;40.00</p>
         <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg">
@@ -58,7 +55,6 @@
         spins_span.innerHTML = ++spins;
         hit_spin_span.innerHTML = (hits / spins)";
         onclick="this.className='item'">
-
             <h2>Apple</h2>
             <p>&dollar;75.00</p>
         <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/iphone-3gs.jpg"> 
@@ -117,5 +113,4 @@ var hits = 1;
 var spins = 5;
 hits_span.innerhtml= hits;
 spins_span.innerhtml= span;
-var over_half= false;
 </script>
