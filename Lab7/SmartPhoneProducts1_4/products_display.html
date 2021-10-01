@@ -42,8 +42,10 @@
         hit_spin_span.innerHTML = (Number(hits_span.innerHTML)/Number(spins_span.innerHTML)).toFixed(2);
         // hit_spin_span.innerHTML = (hits / spins)";
 
-        onclick="this.className= 'item'
-        hit_spin_span.innerHTML = (Number(hits_span.innerHTML)/Number(spins_span.innerHTML)).toFixed(2);
+        onclick="this.className= 'item';
+        hit_spin_span.innerHTML = hits++
+        over_half = over_half || ((spins < 2*hits) && (hits < spins));
+        (Number(hits_span.innerHTML)/Number(spins_span.innerHTML)).toFixed(2);
         // hit_spin_span.innerHTML = (hits / spins)">
         <h2>HTC</h2>
         <p>&dollar;40.00</p>
