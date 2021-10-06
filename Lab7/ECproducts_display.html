@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        var store_name = "Saaya Honjiyo";
+        var first_name = "Saaya";
+        var last_name = "Honjiyo";
+        var hits = 1;
+        spins = 10
+    </script>
+
+    <link rel="stylesheet" href="products-style.css"/>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smartphone Products</title>
+<h1>
+    <p style="text-align: center; font-weight: bold;">
+        Hits:<span id="hits_span">0</span>
+        Spins:<span id="spins_span">0</span>
+        Hit/Spin:<span id="hit_spin_span">0</span>
+        </p>
+</h1>
+
+</head>
+<body>
+    <h1>
+        <span id="name_span" style="font-size: 200%;">
+            <script>
+                document.write('<b>'+ first_name + '</b>' + " " + '<i>'+ last_name + '</i>');
+            </script>
+            Used Smart Phone Store
+        </span>
+    </h1>
+
+<div>
+    <main>
+        <section class="item" onmouseover="
+        if(!this.className.includes ('rotate') == true){
+            this.className ='item rotate'; 
+            spins_span.innerHTML=++spins; hit_spin_span.innerHTML = (hits/spins).toFixed(2);
+        }
+        // -- Winning progress depends on hits/spins
+        hits_spins_ratio = hits/spins;
+        if ( hits_spins_ratio > 0 && hits_spins_ratio < 0.25) {
+            progress = 'On your way!';
+        }
+        else if( hits_spins_ratio >= 0.25 && hits_spins_ratio < 0.5) {
+                progress = 'Almost there!';}
+        else if ( hits_spins_ratio >= 0.5 ) {
+            if( hits < spins) { 
+                    progress = 'You win!';
+                    }
+                }
+        else {
+            progress = 'Get going!';
+            }
+            win_span.innerHTML = progress;
+            "
+        
+         onclick="
+         if(this.className.includes ('rotate')){
+            this.className='item';hits_span.innerHTML=++hits;
+            hit_spin_span.innerHTML = (hits/spins).toFixed(2); 
+            over_half= over_half ||(spins < 2*hits) && (hits<spins);
+            win_span.innerHTML = over_half;
+            }
+">
+            <h2>HTC</h2>
+            <p>&dollar;40.00</p>
+            <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/HTC.jpg">
+        </section>
+
+        <section class="item" onmouseover="
+        if(!this.className.includes ('rotate')){
+            this.className ='item rotate'; 
+            spins_span.innerHTML=++spins; hit_spin_span.innerHTML = (hits/spins).toFixed(2);
+            over_half= over_half|| (spins < 2*hits) && (hits<spins);
+            win_span.innerHTML = over_half;
+        }
+        // -- Winning progress depends on hits/spins
+        hits_spins_ratio = hits/spins;
+        if ( hits_spins_ratio > 0 && hits_spins_ratio < 0.25) {
+            progress = 'On your way!';
+        }
+        else if( hits_spins_ratio >= 0.25 && hits_spins_ratio < 0.5) {
+                progress = 'Almost there!';}
+        else if ( hits_spins_ratio >= 0.5 ) {
+            if( hits < spins) { 
+                    progress = 'You win!';
+                    }
+                }
+        else {
+            progress = 'Get going!';
+            }
+            win_span.innerHTML = progress;
+            "
+         
+         onclick="this.className='item';hits_span.innerHTML=++hits; hit_spin_span.innerHTML = (hits/spins).toFixed(2); over_half= over_half ||(spins < 2*hits) && (hits<spins); win_span.innerHTML = over_half;">
+            <h2>Apple</h2>
+            <p>&dollar;75.00</p>
+            <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/iphone-3gs.jpg">
+        </section>
+
+        <section class="item" onmouseover="
+        if(!this.className.includes ('rotate')){
+            this.className ='item rotate'; 
+            spins_span.innerHTML=++spins; hit_spin_span.innerHTML = (hits/spins).toFixed(2);
+            over_half= over_half|| (spins < 2*hits) && (hits<spins);
+            win_span.innerHTML = over_half;
+        }
+        // -- Winning progress depends on hits/spins
+        hits_spins_ratio = hits/spins;
+        if ( hits_spins_ratio > 0 && hits_spins_ratio < 0.25) {
+            progress = 'On your way!';
+        }
+        else if( hits_spins_ratio >= 0.25 && hits_spins_ratio < 0.5) {
+                progress = 'Almost there!';}
+        else if ( hits_spins_ratio >= 0.5 ) {
+            if( hits < spins) { 
+                    progress = 'You win!';
+                    }
+                }
+        else {
+            progress = 'Get going!';
+            }
+            win_span.innerHTML = progress;
+        "
+         
+         onclick="this.className='item';hits_span.innerHTML=++hits; hit_spin_span.innerHTML = (hits/spins).toFixed(2); over_half= over_half ||(spins < 2*hits) && (hits<spins); win_span.innerHTML = over_half;">
+            <h2>Nokia</h2>
+            <p>&dollar;35.00</p>
+            <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/Nokia.jpg">
+        </section>
+        <section class="item" onmouseover="
+        if(!this.className.includes ('rotate')){
+            this.className ='item rotate'; 
+            spins_span.innerHTML=++spins; hit_spin_span.innerHTML = (hits/spins).toFixed(2);
+            over_half= over_half|| (spins < 2*hits) && (hits<spins);
+            win_span.innerHTML = over_half;
+        }
+        // -- Winning progress depends on hits/spins
+        hits_spins_ratio = hits/spins;
+        if ( hits_spins_ratio > 0 && hits_spins_ratio < 0.25) {
+            progress = 'On your way!';
+        }
+        else if( hits_spins_ratio >= 0.25 && hits_spins_ratio < 0.5) {
+                progress = 'Almost there!';}
+        else if ( hits_spins_ratio >= 0.5 ) {
+            if( hits < spins) { 
+                    progress = 'You win!';
+                    }
+                }
+        else {
+            progress = 'Get going!';
+            }
+            win_span.innerHTML = progress;
+            "
+         
+         onclick="this.className='item';hits_span.innerHTML=++hits; hit_spin_span.innerHTML = (hits/spins).toFixed(2); over_half= over_half ||(spins < 2*hits) && (hits<spins); win_span.innerHTML = over_half;">
+            <h2>Samsung</h2>
+            <p>&dollar;45.00</p>
+            <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/Samsung.jpg">
+        </section>
+        
+        <section class="item" onmouseover="
+        if(!this.className.includes ('rotate')){
+            this.className ='item rotate'; 
+            spins_span.innerHTML=++spins; hit_spin_span.innerHTML = (hits/spins).toFixed(2);
+            over_half= over_half|| (spins < 2*hits) && (hits<spins);
+            win_span.innerHTML = over_half;
+        }
+        // -- Winning progress depends on hits/spins
+        hits_spins_ratio = hits/spins;
+        if ( hits_spins_ratio > 0 && hits_spins_ratio < 0.25) {
+            progress = 'On your way!';
+        }
+        else if( hits_spins_ratio >= 0.25 && hits_spins_ratio < 0.5) {
+                progress = 'Almost there!';}
+        else if ( hits_spins_ratio >= 0.5 ) {
+            if( hits < spins) { 
+                    progress = 'You win!';
+                    }
+                }
+        else {
+            progress = 'Get going!';
+            }
+            win_span.innerHTML = progress;
+        "
+         
+         onclick="this.className='item';hits_span.innerHTML=++hits; hit_spin_span.innerHTML = (hits/spins).toFixed(2); over_half= over_half ||(spins < 2*hits) && (hits<spins); win_span.innerHTML = over_half;">
+            <h2>Blackberry</h2>
+            <p>&dollar;10.00</p>
+            <img src="http://dport96.github.io/ITM352/morea/080.flow-control-II/Blackberry.jpg">
+        </section>
+</main>
+<div>
+    <footer>
+        <script>
+            var now = new Date();
+            var line = 1;
+            document.write (`
+            <table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
+                <tr><th colspan="2"><h1>Your One Stop For Used Phones - ${first_name[0]}.${last_name[0]}.'s</h1></th></tr>
+                <tr><td>${line++}</td><td><br />Copyright @ ${first_name + ' ' + last_name}</td></tr>
+                <tr><td>${line++}</td><td>${now.getFullYear()}</td></tr>
+                <tr><td>${line++}</td><td>${(now.getHours() + 11) % 12 + 1}:${now.getMinutes()} ${(now.getHours() < 12)?'AM':'PM'}</td></tr>
+            </table>
+        `);
+        </script>
+    </footer>
+</body>
+</html>
+<script>
+var hits = 0;
+var spins = 0;
+hits_span.innerhtml= hits;
+spins_span.innerhtml= span;
+</script>
