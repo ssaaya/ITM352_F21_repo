@@ -1,0 +1,1 @@
+var products_array = require('./product_data.json');

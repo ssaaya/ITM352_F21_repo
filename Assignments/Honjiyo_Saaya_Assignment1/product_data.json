@@ -1,0 +1,32 @@
+[
+    {
+        "style": "Balance European",
+        "price": 96.41,
+        "image": "balanceeuro.webp",
+        "quantity_available": 32
+    },
+    {
+        "style": "EuroStretch",
+        "price": 123.00,
+        "image": "eurostretch.webp",
+        "quantity_available": 45
+    },
+    {
+        "style": "Hannah",
+        "price": 100.81,
+        "image": "hannah.webp",
+        "quantity_available": 43
+    },
+    {
+        "style": "Heritage",
+        "price": 100.63,
+        "image": "heritage.webp",
+        "quantity_available": 30
+    },
+    {
+        "style": "Serenade",
+        "price": 84.80,
+        "image": "serenade.webp",
+        "quantity_available": 3
+    }
+]
