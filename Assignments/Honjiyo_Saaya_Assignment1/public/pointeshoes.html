@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="./product_data.js" type="text/javascript"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pointe Shoe Display</title>
+    <link rel="stylesheet" href="/Assignments/Honjiyo_Saaya_Assignment1/css/productdisplay.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<!--- logo and navbar --->
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="/Assignments/Honjiyo_Saaya_Assignment1/public/images/logo.png" width="125px">
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="/Assignments/Honjiyo_Saaya_Assignment1/public/index.html">Home</a></li>
+                        <li><a href="/Assignments/Honjiyo_Saaya_Assignment1/public/pointeshoes.html">Pointe Shoes</a></li>
+                    </ul>
+                    <a href="/Assignments/Honjiyo_Saaya_Assignment1/public/invoice.html"><img src="/Assignments/Honjiyo_Saaya_Assignment1/public/images/carticon.png" width="30px" height="35px"></a>
+                </nav>
+            </div>
+<!-- Order Form -->
+    <h1>Order Now!</h1>
+    <script>  
+    //Lab 13- error 
+    function isNonNegInt(q, return_errors = false) 
+    {
+        errors = []; // Assume no errors at first.
+        if (q == '') q = 0; // Blank quantities = 0.
+        if (Number(q) != q) errors.push('<font color="red">Not a number!</font>'); // Check if string is a number value.
+        else if (q == 0) errors.push('<font color="red">Quantity cannot be zero!</font>'); // Error message for off-nominal case: if submit clicked but 0 quantity.
+        else if (q > 10) errors.push('<font color="red">Only 10 in stock</font>'); // Error message if higher quantity than stock.
+        else if (q < 0) errors.push('<font color="red">Negative value!</font>'); // Check if it is non-negative.
+        else if (parseInt(q) != q) errors.push('<font color="red">Not an integer!</font>'); // Check that it is an integer.
+        return return_errors ? errors : (errors.length == 0);
+    }
+        </script>
+
+
+    <!-- SmartPhoneProducts WODs -->
+    <div>
+        <form action="./purchase" method="post">
+            <main>
+                <script>
+                    for (i in products) {
+                        document.write(`
+        <section class="item">
+            <h2>${products[i].name}</h2>
+            <p>$${products[i].price}</p>
+            <center><input type ="text" placeholder="0" name= "quantity_textbox${i}" onkeyup="checkQuantity${this};"></center><br>
+            <img src=./images/${products[i].image}>
+        </section>
+        `);
+                    }
+                </script>
+            </main>
+            <center><input type="submit" name="purchase_order" value="Place Order"></center>
+        </form>
+    </div>
+
+    </script>
+</body>
+
+</html>
