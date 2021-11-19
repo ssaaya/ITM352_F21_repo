@@ -1,23 +1,14 @@
-<!--receipt template from invoice4 WOD-->
-
-<!--get product data from server-->
 <script src="./product_data.js" type="text/javascript"></script>
+<!-- From Lab12-->
 <script>
-    //get quantity from querystring
     let params = (new URL(document.location)).searchParams;
-    var quantity = []; //start with no quantity
-
-    //from Assignment1 Workshop
-    //if form was submitted on order_form.html, get quantity if it is in the query string
-    if (params.has('purchase_order')) {
-        for (i = 0; i < products.length; i++) {
-            if (params.has(`quantity_textbox${i}`)) {
-                a_qty = params.get(`quantity_textbox${i}`);
-                quantity[i] = a_qty;
-            }
+    if(params.has("quantity_textbox")) {
+        document.write('Thank you for ordering ${params.("quantity_textbox")} shoes!')
+     } else {
+            document.write('Please enter a quantity on the order page.')
         }
-    }
 </script>
+<!---->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,13 +16,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Details</title>
+    <title>Purchase Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Saaya's Pointe Shoes</h1><br>
-    <h2>Thank you for your order!</h2>
+    <h1>Thank you for choosing Saaya's Pointe Shoes!</h1>
+<center>
     <table border="2" class="center">
+<!-- From different Invoice WOD versions, modified -->
         <tbody>
             <tr>
                 <th width="43%">Item</th>
@@ -44,33 +37,33 @@
 
                 //generate item rows for table
                 for (i = 0; i < products.length; i++) {
-                    if (quantity[i] > 0) {
+                    if (quantities[i] > 0) {
                         //calculate extended price
-                        extended_price = quantity[i] * products[i].price;
+                        extended_price = quantities[i] * products[i].price;
                         subtotal += extended_price;
                         //generate the product rows for table
                         document.write(`
-                        <tr>
-                        <td width="43%">${products[i].name}</td>
-                        <td align="center" width="11%">${quantity[i]}</td>
-                        <td width="13%">\$${products[i].price}</td>
-                        <td width="54%">\$${extended_price.toFixed(2)}</td>
-                        </tr>
-                        `);
+                <tr>
+                <td width="43%">${products[i].name}</td>
+                <td align="center" width="11%">${quantity[i]}</td>
+                <td width="13%">\$${products[i].price}</td>
+                <td width="54%">\$${extended_price.toFixed(2)}</td>
+                </tr>
+                `);
                     }
                 }
                 //Tax
-                var tax_rate = .04;
+                var tax_rate = .045;
                 var sales_tax = tax_rate * subtotal;
 
                 //Discount
                 var discount;
-                if (subtotal > 15 && subtotal < 30) {
-                    discount = 2.5;
-                } else if (subtotal >= 30 && subtotal < 50) {
-                    discount = 5;
+                if (subtotal > 200 && subtotal < 300) {
+                    discount = 30;
+                } else if (subtotal >= 300 && subtotal < 500) {
+                    discount = 50;
                 } else {
-                    discount = subtotal * .15;
+                    discount = subtotal * .25;
                 }
 
                 //Grand total
@@ -107,15 +100,23 @@
             <tr>
                 <td colspan="3" width="67%"><strong>Total</strong></td>
                 <td width="54%"><b>$
-            <script>document.write(grand_total.toFixed(2));</script>
-          </b></td>
+                        <script>document.write(grand_total.toFixed(2));</script>
+                    </b></td>
             </tr>
         </tbody>
     </table>
+</center>
     <p>
-        <b>Jasmine Dragon has a special discount when you order online!</b> <br> A subtotal between $15 and $30 will include a $2.50 discount. <br> A subtotal between $30 and $50 will include a $5 discount. <br> Subtotals over $50 will include a 15% discount.
+        <b>Saaya's Pointe Shoes offers a special online discount!</b> <br> A subtotal between $200 and $030 will
+        include a $250 discount. <br> A subtotal between $30 and $500 will include a $50 discount. <br> Subtotals over
+        $500 will include a 25% discount.
     </p>
-    <input type="button" name="to_order_form" value="Order More" onclick="window.location.href ='./order_form.html'">
+    <input type="button" name="toProductsPage" value="Order More!"
+    onclick="window.location.href ='./pointeshoes.html'">
+</body>
+
+</html>
+
 </body>
 
 </html>
