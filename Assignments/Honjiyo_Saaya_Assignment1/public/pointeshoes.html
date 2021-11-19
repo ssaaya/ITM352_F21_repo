@@ -1,4 +1,65 @@
 <script src="./product_data.js" type="text/javascript"></script>
+
+<script>
+    // Start of functions, checks quantity box
+
+    // Modified from Lab 12, function to check valid quantity
+    function isNonNegInt(qty, return_errors = false) { //check if values are postitive, integer, whole values 
+    errors = []; // assume no errors at first
+    if (qty == '') qty = 0; //sets input quantity as 0 
+    if (Number(qty) != qty) errors.push(' <b>Please change to a number</b>'); // Check if string is a number value
+    else if (qty < 0) errors.push('<b>Please change to a positive integer</b>'); // Check if it is non-negative
+    else if (parseInt(qty) != qty) errors.push('<b>Please change to a full value</b>'); // Check that it is an integer
+    return return_errors ? errors : (errors.length == 0);
+}
+
+    // Checks textbox for valid quantity, Lab12
+    function checkQuantityTextbox(purchase_qty) {
+        // Checks textbox to see if it is a valid integer
+        errs = isNonNegInt(purchase_qty.value, true);
+        // Allows amount adjustment
+        if (errs.length == 0) errs = ['Quantity'];
+        if (purchase_qty.value.trim() == '') errs = ['Quantity'];
+        document.getElementById(purchase_qty.name + '_label').innerHTML = errs.join(' , ');
+    }
+
+    // Uses quantity from page
+    window.onload =  function () {
+        // Checks quantity to checkout at invoice
+        let params = (new URL(document.location)).searchParams;
+        if (params.has('submit_purchase')) {
+            // Checks number input
+            is_error = false;
+            // Checks any 0's
+            total_qty = 0;
+            // Array image and price 
+            for (i = 0; i < products.length; i++) {
+                if (params.has(`quantity${i}`)) {
+                    a_qty = params.get(`quantity${i}`);
+                    product_form[`quantity${i}`].value = a_qty;
+                    total_qty += a_qty;
+                    if (!isNonNegInt(a_qty)) {
+                        is_error = true; 
+                        // Finds errors
+                        checkQuantityTextbox(product_form[`quantity${i}`]); 
+                        }   
+                    }
+                }
+                // Look for errors, if not redirect to invoice
+                // Alert if error
+                if (is_error) {
+                    alert("Please enter valid quantity");
+                } else if (total_qty == 0) {
+                // Alert if no quantity error
+                    alert("Please enter a quantity");
+                } else { 
+                // No Errors, redirect to invoice
+                    window.location = `./invoice.html${document.location.search}`;
+                    window.stop;
+                }
+            }
+        }
+        </script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,17 +95,17 @@
             <center>
                 <h1>Order Here!</h1>
             </center>
+            <form name="order_form" action="./process_form" method="POST"></form>
             <center>
                 <p>Order your pointe shoes by entering a quantity in the textbox and press "Purchase" at the bottom of
                     the page!</p>
             </center>
             <!-- From SmartPhoneProducts WODs, modified formatting, displays products-->
             <div>
-                <form action="" method="GET" name="quantity_form">
-                    <main>
-                        <script>
-                            for (let i in products) {
-                                document.write(`
+                <main>
+                    <script>
+                         for(i=0; i<=products.length; i++) {
+                            document.write(`
         <section class="item">
             <center><img src=${products[i].image}></center>
             <font color = "#6d6d5f"> <center><h2>${products[i].name}</h2></center></font>
@@ -52,34 +113,16 @@
             <center><input type= "text" size="2" placeholder="0" name= "quantity_textbox${i}" onkeyup="checkQuantityTextbox(this)"><span id="quantity_textbox${i}_message"></span></center>
         </section>
         `);
-                            }
-                        </script>
-                    </main>
+                        }
+                    </script>
+                </main>
+                <!-- Purchase button-->
+                <form name="product_selection_form" action="invoice.html" method="POST">
                     <center><input type="submit" name="SubmitPurchase" value="Purchase" </center>
             </div>
             </form>
             </script>
 
 </body>
+
 </html>
-<!-- Check for errors, redirect to invoice-->
-   <script>
-    function checkQuantityTextbox(theTextbox) {
-        // is the textbox value a non-neg int?
-        var errors_array = isNonNegInt(theTextbox.value, true);
-        qty_textbox_message.innerHTML = errors_array.join('');
-    }
-    function isNonNegInt(q, returnErrors = false) {
-    //If returnErrors is true, array of errors is returned
-    //others return true if q is a non-neg int.
-    errors = []; // assume no errors at first
-    if (q == '') q = 0;
-    if (Number(q) != q) errors.push('Not a number!'); // Check if string is a number value
-    else {
-    if (q < 0) errors.push('Negative value!'); // Check if it is non-negative
-    if (parseInt(q) != q) errors.push('Not an integer!'); // Check that it is an integer
-    }
-    return returnErrors ? errors : (errors.length == 0)
-  }
-        
-</script>
