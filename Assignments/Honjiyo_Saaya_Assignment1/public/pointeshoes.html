@@ -28,9 +28,10 @@
                 </nav>
             </div>
 <!-- Order Form -->
-    <h1>Order Now!</h1>
+    <center><h1>Order Now!</h1></center>
+    <center><p>Order your pointe shoes by entering in a positive quantity!</p></center>
     <script>  
-    //Lab 13- error 
+    //Lab 13- errors 
     function isNonNegInt(q, return_errors = false) 
     {
         errors = []; // Assume no errors at first.
@@ -45,7 +46,7 @@
         </script>
 
 
-    <!-- SmartPhoneProducts WODs -->
+    <!-- From SmartPhoneProducts WODs, modified formatting-->
     <div>
         <form action="./purchase" method="post">
             <main>
@@ -53,16 +54,16 @@
                     for (i in products) {
                         document.write(`
         <section class="item">
-            <h2>${products[i].name}</h2>
-            <p>$${products[i].price}</p>
-            <center><input type ="text" placeholder="0" name= "quantity_textbox${i}" onkeyup="checkQuantity${this};"></center><br>
-            <img src=./images/${products[i].image}>
+            <font color = "#6d6d5f"> <center><h2>${products[i].name}</h2></center></font>
+            <center><p>$${products[i].price}</p></center>
+            <center><input type ="text" placeholder="0" name= "quantity_textbox${i}" onkeyup="checkQuantity${this};"></center>
+            <center><img src=${products[i].image}></center>
         </section>
         `);
-                    }
+    }
                 </script>
             </main>
-            <center><input type="submit" name="purchase_order" value="Place Order"></center>
+            <center><input type="submit" name="purchase_products" value="Place Order"></center>
         </form>
     </div>
 
