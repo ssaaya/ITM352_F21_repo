@@ -1,0 +1,113 @@
+<script src="./product_data.js" type="text/javascript">// Allows product array</script>
+
+<script>
+    // Start of functions, checks quantity box
+
+    // Retrieved from lab 12, function to check valid digit
+    function isNonNegInt(qty, return_errors = false) { //this function checks if values are postitive, integer, whole values 
+    errors = []; // assume no errors at first
+    if (qty == '') qty = 0; //sets input quatity as 0 
+    if (Number(qty) != qty) errors.push(' <b>This is not a number!</b>'); // Check if string is a number value
+    else if (qty < 0) errors.push('<b>Negative value!</b>'); // Check if it is non-negative
+    else if (parseInt(qty) != qty) errors.push('<b>This is not a full value!</b>'); // Check that it is an integer
+    return return_errors ? errors : (errors.length == 0);
+}
+
+    // Checks textbox for valid quantity, reference from lab 12
+    function checkQuantityTextbox(purchase_qty) {
+        // Checks textbox to see if it is a valid integer
+        errs = isNonNegInt(purchase_qty.value, true);
+        // Allows amount adjustment
+        if (errs.length == 0) errs = ['Quantity'];
+        if (purchase_qty.value.trim() == '') errs = ['Quantity'];
+        document.getElementById(purchase_qty.name + '_label').innerHTML = errs.join(' , ');
+    }
+
+    // Uses quantity from page
+    window.onload =  function () {
+        // Checks quantity to checkout at invoice
+        let params = (new URL(document.location)).searchParams;
+        if (params.has('submit_purchase')) {
+            // Checks number input
+            is_error = false;
+            // Checks any 0's
+            total_qty = 0;
+            // Array image and price 
+            for (i = 0; i < products.length; i++) {
+                if (params.has(`quantity${i}`)) {
+                    a_qty = params.get(`quantity${i}`);
+                    product_form[`quantity${i}`].value = a_qty;
+                    total_qty += a_qty;
+                    if (!isNonNegInt(a_qty)) {
+                        is_error = true; 
+                        // Finds errors
+                        checkQuantityTextbox(product_form[`quantity${i}`]); 
+                        }   
+                    }
+                }
+                // Error Responses, or redirects to invoice
+                // Alert if quantity is not valid
+                if (is_error) {
+                    alert("Please enter valid quantity");
+                } else if (total_qty == 0) {
+                // Alert if no quantity has been inputted
+                    alert("Please enter a quantity");
+                } else { 
+                // No Errors and a quantity has been inputted, sends to invoice
+                    window.location = `./invoice.html${document.location.search}`;
+                    window.stop;
+                }
+            }
+        }
+</script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OuterWear</title>
+    <link href="products_style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Beginning of invoice -->
+    <form name= "product_form" action= "/process_purchase" method= "POST">
+    <header>
+        <h1>Fashion OuterWear</h1>
+    </header>
+    <div>
+        <main>
+            
+            <script>
+                // Start of products display, loops through products.json and provides a quantity input box
+                for (i = 0; i < products.length; i++) {
+                    document.write(`
+                    <section class="item">
+                    <h2>${products[i]['brand']}</h2>
+                    <p>\$${products[i]['price']}</p>
+                    <img src="${products[i]['image']}">
+                    <br>
+                    <label id= "quantity${i}_label"}">Quantity</label>
+                    <input type= "text" placeholder= "0" name= "quantity${i}" 
+                        onkeyup= "checkQuantityTextbox(this);">
+                    </section>
+                    `);
+                }
+            </script>
+        </main>
+    </div>
+        <footer>
+            <!-- Submit button, using post from form tag, sends to invoice -->
+            <input type= "submit" value= "Submit Purchase Here" name= "submit_purchase">
+        </footer>
+    </form>
+    <div>
+        <ul>
+            <!-- Sends to index -->
+          <h2>Return to Home</h2>
+          <a href="./index.html">Home</a>
+      </div>
+</body>
+</html>

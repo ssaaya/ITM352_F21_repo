@@ -1,14 +1,26 @@
-<script src="./product_data.js" type="text/javascript"></script>
+<script src="product_data.js" type="text/javascript"></script>
 <!-- From Lab12-->
 <script>
+    // Query string with form data
     let params = (new URL(document.location)).searchParams;
-    if(params.has("quantity_textbox")) {
-        document.write('Thank you for ordering ${params.("quantity_textbox")} shoes!')
-     } else {
-            document.write('Please enter a quantity on the order page.')
+// Allows form submission, checks quantities from form, quantities put into array
+var quantities = [];
+    if (params.has('submit_purchase')) {
+        for (i = 0; i < products.length; i++) {
+            if (params.has(`quantity${i}`)) {
+                a_qty = params.get(`quantity${i}`);
+                quantities[i] = a_qty;
+            }
         }
+    } else {
+        // Form error, quantity inputed is wrong
+        (document.write('No form was submitted! Please make a purchase.'));
+    }
+    // Prints quantities
+    console.log(quantities);
 </script>
-<!---->
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,13 +29,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase Details</title>
-    <link rel="stylesheet" href="/Assignments/Honjiyo_Saaya_Assignment1/css/invoice.css">
+    <link rel="stylesheet" href="./public/css/invoice.css">    
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <center>
     <h1>Thank you for choosing Saaya's Pointe Shoes!</h1>
-<center>
+    <h3>Here is a copy of your receipt</h3>
     <table border="2" class="center">
 <!-- From different Invoice WOD versions, modified -->
         <tbody>
@@ -34,86 +47,69 @@
                 <th width="54%">Extended Price</th>
             </tr>
             <script>
-                subtotal = 0; //start subtotal with 0
-
-                //generate item rows for table
-                for (i = 0; i < products.length; i++) {
-                    if (quantities[i] > 0) {
-                        //calculate extended price
-                        extended_price = quantities[i] * products[i].price;
-                        subtotal += extended_price;
-                        //generate the product rows for table
-                        document.write(`
+            // Product quantities for customer purchase
+        subtotal = 0
+        for (i = 0; i < products.length; i++) {
+           if (quantities[i] > 0) {
+              // Calculations for subtotal
+              extended_price = quantities[i] * products[i]['price']
+              subtotal += extended_price;
+              // Prints customer order
+              document.write(`
                 <tr>
-                <td width="43%">${products[i].name}</td>
-                <td align="center" width="11%">${quantity[i]}</td>
-                <td width="13%">\$${products[i].price}</td>
-                <td width="54%">\$${extended_price.toFixed(2)}</td>
+                  <td width="40%">${products[i]['brand']}</td>
+                  <td align="center" width="10%">${quantities[i]}</td>
+                  <td width="20%">\$${products[i]['price']}</td>
+                  <td width="20%">\$${extended_price}</td>
                 </tr>
-                `);
-                    }
-                }
-                //Tax
-                var tax_rate = .045;
-                var sales_tax = tax_rate * subtotal;
+              `);
+            }
+        }
 
-                //Discount
-                var discount;
-                if (subtotal > 200 && subtotal < 300) {
-                    discount = 30;
-                } else if (subtotal >= 300 && subtotal < 500) {
-                    discount = 50;
-                } else {
-                    discount = subtotal * .25;
-                }
+        // Tax, subtotal, shipping, and total referenced from invoice4
+        // Compute Sales Tax, using Hawaii tax rate
+        var tax_rate = 0.0443;
+        var tax = subtotal * tax_rate;
 
-                //Grand total
-                var grand_total = subtotal + sales_tax - discount;
-            </script>
-            <tr>
-                <td colspan="4" width="100%">&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="3" width="67%">Sub-total</td>
-                <td width="54%">$
-                    <script>
-                        document.write(subtotal.toFixed(2));
-                    </script>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" width="67%">Tax @ 4%
-                </td>
-                <td width="4%">$
-                    <script>
-                        document.write(sales_tax.toFixed(2));
-                    </script>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" width="67%">Online Order Discount</td>
-                <td width="54%">$
-                    <script>
-                        document.write(discount.toFixed(2));
-                    </script>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3" width="67%"><strong>Total</strong></td>
-                <td width="54%"><b>$
-                        <script>document.write(grand_total.toFixed(2));</script>
-                    </b></td>
-            </tr>
-        </tbody>
-    </table>
-</center>
+        // Compute Shipping
+        if(subtotal <= 50) {
+          shipping = 2;
+        } else if(subtotal <= 100) {
+            shipping = 5;
+        } else {
+          shipping = subtotal * 0.04; // 4% for orders more than 100, shipping cost
+        }
+
+        // Compute Total
+        var total = subtotal + tax + shipping;
+      </script>
+      <!-- Table  -->
+      <tr>
+        <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
+        <td width="54%">$<script>document.write(subtotal.toFixed(2));</script></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="3" width="67%"><span style="font-weight: bold;">Tax of 4.43%</span></td>
+        <td width="54%">$<script>document.write(tax.toFixed(2))</script></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="3" width="67%">Shipping</td>
+        <td width="54%">$<script>document.write(shipping.toFixed(2));</script></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
+        <td width="54%"><strong>$<script>document.write(total.toFixed(2))</script></strong></td>
+      </tr>
+    </tbody>
+  </table>
     <p>
-        <b>Saaya's Pointe Shoes offers a special online discount!</b> <br> A subtotal between $200 and $300 will
-        include a $250 discount. <br> A subtotal between $30 and $500 will include a $50 discount. <br> Subtotals over
-        $500 will include a 25% discount.
+        <b>OUR SHIPPING POLICY IS:</b> A subtotal $0 - $49.99 will be $2 shipping <br>
+        A subtotal $50 - $99.99 will be $5 shipping <br>
+        Subtotals over $100 will be charged 4% of the subtotal amount.
     </p>
     <input type="button" name="toProductsPage" value="Order More!"
     onclick="window.location.href ='./pointeshoes.html'">
+</center>
 </body>
 
 </html>

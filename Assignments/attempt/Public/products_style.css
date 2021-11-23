@@ -1,0 +1,52 @@
+/* Style sheet for product_page, referencing SmartPhoneProducts3 */
+
+/* General */
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url(/product_image/Background2.jpg);
+    text-align: center;
+    margin: center;
+}
+
+/* Product image */
+
+img {
+    width: 250px;
+    height: 250px;
+    border: 2px solid;
+}
+
+/* Placement */
+
+section {
+    width: 45%;
+    margin: 0 auto;
+    background:silver;
+}
+
+footer {
+    padding: 20px;
+}
+
+/* Text */
+
+h1 {
+    font-size: 500%;
+    background: silver;
+}
+
+h2 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;  
+    font-size: x-large;
+}
+
+p {
+    font-size: medium;
+    font-weight: 900;
+}
+
+input[type="submit"]{
+    text-align: center;
+    background-color: beige;
+}
+
