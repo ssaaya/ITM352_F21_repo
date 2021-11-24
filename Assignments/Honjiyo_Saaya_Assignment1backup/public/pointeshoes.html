@@ -43,23 +43,6 @@ function isNonNegInt(q, return_errors = false) {
 </head>
 
 <body>
- <!--- logo and navbar --->
- <div class="header">
-    <div class="container">
-        <div class="navbar">
-            <div class="logo">
-                <img src="/Assignments/Honjiyo_Saaya_Assignment1/public/images/logo.png" width="125px">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="./pointeshoes.html">Pointe Shoes</a></li>
-                    <li><a href="./invoice.html"><img src="./images/carticon.png" width="30px" height="35px"></a></li>
-                    <li><a href=""><img src="./images/loginicon.png" width="40px" height="35px"></a></li>
-
-                </ul>
-            </nav>
-        </div>
             <!-- Order Form -->
             <center>
                 <h1>Order Here!</h1>
@@ -72,7 +55,7 @@ function isNonNegInt(q, return_errors = false) {
             <!-- From SmartPhoneProducts WODs, modified formatting, displays products-->
                 <main>
                     <form name="quantity_form" action="./process_form" method="post">
-                    <div id = "column">                    
+                    <div>                    
                         <script>
                         for(i=0; i < products.length; i++) {
                            document.write(`

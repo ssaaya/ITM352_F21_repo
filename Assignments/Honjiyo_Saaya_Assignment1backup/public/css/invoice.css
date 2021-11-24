@@ -1,4 +1,4 @@
-/*body*/
+*/body*/
 *{
     margin: 0;
     padding: 0;
@@ -17,16 +17,4 @@ p{
 }
 h1{
     color: #5d5a43;
-}
-.container{
-    max-width: 1300px;
-    margin: auto;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-.row{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-around;
 }

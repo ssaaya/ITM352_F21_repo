@@ -15,18 +15,18 @@ var products = [
         name: "Hannah",
         price: 79.99,
         quantity: 23,
-        image: "https://cdn1.discountdance.com/image/207x275/s0109l_1.jpg",
+        image: "/Assignments/Honjiyo_Saaya_Assignment1/public/images/hannah.png",
     },
     {
         name: "Heritage",
         price: 98.55,
         quantity: 31,
-        image: "https://cdn1.discountdance.com/image/207x275/s0180l_1.jpg",
+        image: "/Assignments/Honjiyo_Saaya_Assignment1/public/images/heritage.png",
     },
     {
         name: "Serenade",
         price: 99.99,
         quantity: 11,
-        image: "https://cdn1.discountdance.com/image/207x275/s0131_1.jpg",
-    }
-];
+        image: "/Assignments/Honjiyo_Saaya_Assignment1/public/images/serenade.png",
+    },
+]
