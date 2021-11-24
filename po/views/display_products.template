@@ -1,0 +1,70 @@
+<script>
+/* 
+ * Author: Alyssia Chen
+ * Date: November 14th, 2021
+ * Description: Provides the skeleton for the products display. Customers will be able to indicate the quantities of each 
+ *              product they want to buy and then press a submit button to submit a POST request for the server to process. 
+ *              CSS Template for the page from w3schools. Button styling from https://getcssscan.com/css-buttons-examples.
+ *              File from adapted from Assignment1 Example MVC.
+ */
+</script>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Flora's Fauna</title>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+    .w3-bar-block .w3-bar-item {padding:20px}
+    img { border-radius: 2%; }
+    .button
+    {
+        color: #F26B8A;
+        border: 1px solid #ffffff;
+        box-shadow: -6px 8px 10px rgba(81,41,10,0.1),0px 2px 2px rgba(81,41,10,0.2);
+        cursor: pointer;
+        background-image: linear-gradient(to bottom, #fff, #f8eedb);
+        transition: all .1s cubic-bezier(.4, 0, .2, 1);
+    }
+    .button:active {
+        background-color: #f3f4f6;
+        box-shadow: -1px 2px 5px rgba(81,41,10,0.15),0px 1px 1px rgba(81,41,10,0.15);
+        transform: translateY(0.125rem);
+    }
+    .button-83:focus {
+        box-shadow: rgba(72, 35, 7, .46) 0 0 0 4px, -6px 8px 10px rgba(81,41,10,0.1), 0px 2px 2px rgba(81,41,10,0.2);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="w3-top">
+        <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
+            <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+            <div class="w3-center w3-padding-16">Flora's galore of flora</div>
+        </div>
+    </div>
+    <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+        <form name="product_selection_form" action="/purchase" method="POST">
+            <div>
+                <main>
+                    ${display_products()}
+                </main>
+            </div>
+            <footer>
+                <div style='text-align: center;'">
+                    <h3> Everyone deserves flowers </h3>
+                    <input type="submit" value="Purchase!" name="purchase_submit" class="button">
+                </div>
+            </footer>
+        </form>
+    </div>
+</body>
+
+</body>
+
+</html>

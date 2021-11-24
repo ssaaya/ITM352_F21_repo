@@ -1,0 +1,58 @@
+[
+    {
+        "flower": "Rose",
+        "price": 24.50,
+        "color": "Red",
+        "image": "/images/rose.jpeg",
+        "quantity_available": 30
+    },
+    {
+        "flower": "Dandelion",
+        "price": 5,
+        "color": "White",
+        "image": "/images/dandelion.jpeg",
+        "quantity_available": 50
+    },
+    {
+        "flower": "Tulip",
+        "price": 35.75,
+        "color": "Purple",
+        "image": "/images/tulip.jpeg",
+        "quantity_available": 15
+    },
+    {
+        "flower": "Baby's breath",
+        "price": 15,
+        "color": "White",
+        "image": "/images/babys_breath.jpeg",
+        "quantity_available": 35
+    },
+    {
+        "flower": "Blue bells",
+        "price": 20,
+        "color": "Blue",
+        "image": "/images/blue_bells.jpeg",
+        "quantity_available": 20
+    },
+    {
+        "flower": "Sunflower",
+        "price": 12,
+        "color": "Yellow",
+        "image": "/images/sunflower.jpg",
+        "quantity_available": 38
+    },
+    {
+        "flower": "Daisy",
+        "price": 5,
+        "color": "White",
+        "image": "/images/daisy.jpg",
+        "quantity_available": 24
+    },
+    {
+        "flower": "Lavender",
+        "price": 9,
+        "color": "Purple",
+        "image": "/images/lavender.jpeg",
+        "quantity_available": 20
+    }
+]

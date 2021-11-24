@@ -1,0 +1,120 @@
+<script>
+/* 
+ * Author: Alyssia Chen
+ * Date: November 14th, 2021
+ * Description: Provides the skeleton for the invoice and uses a function on the server side to generate the rows
+ *              with the purchased products info for the invoice. Button styling from https://getcssscan.com/css-buttons-examples.
+ *              File from adapted from Assignment1 Example MVC.
+ */
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Flora's Flora</title>
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+    body {
+      background: url('https://freerangestock.com/sample/115709/many-colored-flower-background-.jpg') no-repeat center;
+      background-size: cover;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+    .w3-bar-block .w3-bar-item {padding:20px}
+    img { border-radius: 0%; }
+    .button
+    {
+      color: #10603a;
+      border: 1px solid #ffffff;
+      box-shadow: -6px 8px 10px rgba(81,41,10,0.1),0px 2px 2px rgba(81,41,10,0.2);
+      cursor: pointer;
+      background-image: linear-gradient(to bottom, #fff, #f8eedb);
+      transition: all .1s cubic-bezier(.4, 0, .2, 1);
+    }
+    .button:active {
+      background-color: #f3f4f6;
+      box-shadow: -1px 2px 5px rgba(81,41,10,0.15),0px 1px 1px rgba(81,41,10,0.15);
+      transform: translateY(0.125rem);
+    }
+    .button-83:focus {
+      box-shadow: rgba(72, 35, 7, .46) 0 0 0 4px, -6px 8px 10px rgba(81,41,10,0.1), 0px 2px 2px rgba(81,41,10,0.2);
+    }
+    
+    .center {
+      margin: auto;
+      width: 40%;
+      border: 2px solid #F26B8A;
+      padding: 10px;
+      background-color: #ffffff;
+      }
+    .greeting {
+    font-family: cursive;
+    font-size: 5em;
+    }
+    </style>
+
+</head>
+
+<body>
+<br></br>
+<h1 style="text-align: center;" class="greeting">Thank you for shopping at Flora's!</h1>
+<div class="center">
+  <table border="1">
+    <tbody>
+    <b>
+      <tr>
+        <th style="text-align: center;" width="43%">Item</th>
+        <th style="text-align: center;" width="11%">Quantity</th>
+        <th style="text-align: center;" width="13%">Price</th>
+        <th style="text-align: center;" width="54%">Extended price</th>
+      </tr>
+      </b>
+        ${display_invoice_table_rows()}
+      <tr>
+        <td colspan="4" width="100%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
+        <td width="54%">$${subtotal.toFixed(2)}
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="3" width="67%">Tax @
+            ${(100 * tax_rate)}%</td>
+        <td width="54%">\$${tax.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="3" width="67%">Shipping</span></td>
+        <td width="54%">\$${shipping.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
+        <td width="54%"><strong>\$${total.toFixed(2)}</strong></td>
+      </tr>
+    </tbody>
+  </table>
+    <div style="text-align: center;">
+      <br><b>
+        OUR SHIPPING POLICY IS:<br>
+        A subtotal $0 - $49.99 will be $2 shipping<br>
+        A subtotal $50 - $99.99 will be $5 shipping<br>
+        Subtotals over $100 will be charged 5% of the subtotal amount
+      </b> 
+    </div>
+</div>
+<br><b>
+<div style="text-align: center">
+  <a href="/store"><button class="button" style="text-align: center">Return back to the product ordering page</button></a>
+</div>
+  
+</body>
+
+</html>

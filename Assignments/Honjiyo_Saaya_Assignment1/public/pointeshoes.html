@@ -1,64 +1,38 @@
-<script src="./product_data.js" type="text/javascript"></script>
-
-<script>
-    // Modified from Lab 12, function to check valid quantity
-    function isNonNegInt(qty, return_errors = false) { //check if values are postitive, integer, whole values 
-    errors = []; // assume no errors at first
-    if (qty == '') qty = 0; //sets input quantity as 0 
-    if (Number(qty) != qty) errors.push(' <b>Please change to a number</b>'); // Check if string is a number value
-    else if (qty < 0) errors.push('<b>Please change to a positive integer</b>'); // Check if it is non-negative
-    else if (parseInt(qty) != qty) errors.push('<b>Please change to a full value</b>'); // Check that it is an integer
-    return return_errors ? errors : (errors.length == 0);
-}
-    // Checks textbox for valid quantity, Lab12
-    function checkQuantityTextbox(purchase_qty) {
-        // Checks textbox to see if it is a valid integer
-        errs = isNonNegInt(purchase_qty.value, true);
-        // Allows amount adjustment
-        if (errs.length == 0) errs = ['quantity'];
-        if (purchase_qty.value.trim() == '') errs = ['quantity'];
-        document.getElementById(purchase_qty.name + '_label').innerHTML = errs.join(' , ');
-    }
-    // Uses quantity from page
-    window.onload =  function () {
-        // Checks quantity to checkout at invoice
-        let params = (new URL(document.location)).searchParams;
-        if (params.has('submit_purchase')) {
-            // Checks number input
-            is_error = false;
-            // Checks any 0's
-            total_qty = 0;
-            // Array image and price 
-            for (i = 0; i < products.length; i++) {
-                if (params.has(`quantity${i}`)) {
-                    a_qty = params.get(`quantity${i}`);
-                    product_form[`quantity${i}`].value = a_qty;
-                    total_qty += a_qty;
-                    if (!isNonNegInt(a_qty)) {
-                        is_error = true; 
-                        // Finds errors
-                        checkQuantityTextbox(product_form[`quantity${i}`]); 
-                        }   
-                    }
-                }
-                // Look for errors, if not redirect to invoice
-                // Alert if error
-                if (is_error) {
-                    alert("Please enter valid quantity");
-                } else if (total_qty == 0) {
-                // Alert if no quantity error
-                    alert("Please enter a quantity");
-                } else { 
-                // No Errors, redirect to invoice
-                    window.location = `./invoice.html${document.location.search}`;
-                    window.stop;
-                }
-            }
-        }
-        </script>
+<script src="/Assignments/Honjiyo_Saaya_Assignment1/product_data.js" type="text/javascript"> //pull data from product_data.js</script>        
 <!DOCTYPE html>
 <html lang="en">
-
+    <script>
+		let params = (new URL(document.location)).searchParams;
+	window.onload = () =>  {
+		if(params.has('purchase_submit')) {
+			var quantities = JSON.parse(params.get('quantity'));
+			for(i in quantities) {
+				order_form[`quantity[${i}]`].value = quantities[i];
+			}
+		}
+		
+		//pop up error message
+		if(params.has('errors')) {
+			var errors = JSON.parse(params.get('errors')); 
+			let err_str = '';
+			for(err in  errors) {
+				err_str += errors[err] + '\n';
+			}
+			alert(err_str);
+		}
+	}
+//modified from Lab12
+function isNonNegInt(q, return_errors = false) {
+        errors = []; // assume no errors at first
+        if (q == '') q = 0; // handle blank inputs as if they are 0
+        if (Number(q) != q) errors.push('<font color="red">Not a number!</font>'); // Check if string is a number value
+        else if (q > 10) errors.push('<font color="red">Only 10 in stock</font>');
+        else if (q == 0) errors.push('<font color="red">Please select!</font>');
+        else if (q < 0) errors.push('<font color="red">Negative value!</font>'); // Check if it is non-negative
+        else if (parseInt(q) != q) errors.push('<font color="red">Not an integer!</font>'); // Check that it is an integer
+        return return_errors ? errors : (errors.length == 0);
+    }
+	</script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,11 +59,11 @@
                         <script>
                         for(i=0; i < products.length; i++) {
                            document.write(`
-       <section class="item">
+                           <section class="item">
            <center><img src=${products[i].image}></center>
            <font color = "#6d6d5f"> <center><h2>${products[i].name}</h2></center></font>
            <center><p>$${products[i].price} ~ Quantity Available:${products[i].quantity}</p></center>
-           <center><input type= "text" size="2" placeholder="0" name= "quantity_textbox${i}" onkeyup="checkQuantityTextbox(this)"><span id="quantity_textbox${i}_message"></span></center>
+           <center><input type= "text" size="2" placeholder="0" name= "quantity_textbox${i}" <span id="quantity_textbox${i}_message"></span></center>
        </section>
        `);
                        }

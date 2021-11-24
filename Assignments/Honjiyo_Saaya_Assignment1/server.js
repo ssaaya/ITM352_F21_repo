@@ -1,7 +1,7 @@
 // From from Lab 13, screencast, uses npm express, querystring, and nodemon to run server
 
 // Pull data from product_data.js
-var data = require('./product_data');
+var data = require('./product_data.js');
 var products = data.products;
 // Sets query_string to load
 const qs = require('query-string');
@@ -16,7 +16,7 @@ app.all('*', function (request, response, next) {
     next();
 });
 //Get request for products data
-app.get('/products.js', function (request, response) {
+app.get('./product_data.js', function (request, response) {
     response.type('.js');
     var products_str = `var products = ${JSON.stringify(products)};`;
     response.send(products_str);
@@ -65,7 +65,7 @@ app.post('/process_form', function (request, response) {
             
         } else {
             // If not valid, sends back
-            response.redirect("./pointeshoes.html.html?" + stringified);
+            response.redirect("./pointeshoes.html?" + stringified);
             
         }
    }
