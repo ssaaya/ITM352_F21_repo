@@ -30,6 +30,3 @@ var products = [
         image: "https://cdn1.discountdance.com/image/207x275/s0131_1.jpg",
     }
 ];
-if(typeof exports != 'undefined') { // try to export this file to server.js
-    exports.products = products;
-    }
