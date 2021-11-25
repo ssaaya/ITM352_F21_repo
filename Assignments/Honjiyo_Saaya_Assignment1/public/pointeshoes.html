@@ -1,7 +1,8 @@
-<script src="/Assignments/Honjiyo_Saaya_Assignment1/product_data.js" type="text/javascript"> //pull data from product_data.js</script>        
+<script src="./product_data.js" type="text/javascript"> //pull data from product_data.js</script>        
 <!DOCTYPE html>
 <html lang="en">
     <script>
+        
 		let params = (new URL(document.location)).searchParams;
 	window.onload = () =>  {
 		if(params.has('purchase_submit')) {
@@ -21,17 +22,6 @@
 			alert(err_str);
 		}
 	}
-//modified from Lab12
-function isNonNegInt(q, return_errors = false) {
-        errors = []; // assume no errors at first
-        if (q == '') q = 0; // handle blank inputs as if they are 0
-        if (Number(q) != q) errors.push('<font color="red">Not a number!</font>'); // Check if string is a number value
-        else if (q > 10) errors.push('<font color="red">Only 10 in stock</font>');
-        else if (q == 0) errors.push('<font color="red">Please select!</font>');
-        else if (q < 0) errors.push('<font color="red">Negative value!</font>'); // Check if it is non-negative
-        else if (parseInt(q) != q) errors.push('<font color="red">Not an integer!</font>'); // Check that it is an integer
-        return return_errors ? errors : (errors.length == 0);
-    }
 	</script>
 <head>
     <meta charset="UTF-8">
@@ -48,7 +38,7 @@ function isNonNegInt(q, return_errors = false) {
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <img src="/Assignments/Honjiyo_Saaya_Assignment1/public/images/logo.png" width="125px">
+                <img src="./images/logo.png" width="125px">
             </div>
             <nav>
                 <ul>
@@ -80,7 +70,7 @@ function isNonNegInt(q, return_errors = false) {
            <center><img src=${products[i].image}></center>
            <font color = "#6d6d5f"> <center><h2>${products[i].name}</h2></center></font>
            <center><p>$${products[i].price} ~ Quantity Available:${products[i].quantity}</p></center>
-           <center><input type= "text" size="2" placeholder="0" name= "quantity_textbox${i}" <span id="quantity_textbox${i}_message"></span></center>
+           <center><input type= "text" size="2" placeholder="0" name= "quantity${i}" <span id="quantity${i}_message"></span></center>
        </section>
        `);
                        }
@@ -88,7 +78,7 @@ function isNonNegInt(q, return_errors = false) {
                </main></div>
 
                 <!-- Purchase button-->
-                <center><input type="submit" class="button" value="Purchase" id="submit" name="purchase_submit"></center>
+                <center><input type="submit" class="button" value="Purchase" id="submit" name="submit_purchase"></center>
             </div>
             </form>
             </script>

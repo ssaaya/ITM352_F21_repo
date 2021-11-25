@@ -1,30 +1,23 @@
 // From from Lab 13, screencast, uses npm express, querystring, and nodemon to run server
 
 // Pull data from product_data.js
-var data = require('./product_data.js');
-var products = data.products;
+var products = require('./product_data.json');
 // Sets query_string to load
-const qs = require('query-string');
+const qs = require('querystring');
 // Allowing express, server starts
 var express = require('express');
 var app = express();
-// Loads parser
-var myParser = require("body-parser");
 // Monitors all requests
 app.all('*', function (request, response, next) {
     console.log(request.method + ' to' + request.path);
     next();
 });
 //Get request for products data
-app.get('./product_data.js', function (request, response) {
+
+app.get('/product_data.js', function (request, response) {
     response.type('.js');
     var products_str = `var products = ${JSON.stringify(products)};`;
     response.send(products_str);
-});
-// From Lab 13, redirect invoice
-app.all('*', function (request, response, next) {
-    console.log(request.method + ' to path ' + request.path);
-    next();
 });
 
 // Uses data in body Lab14
@@ -46,18 +39,8 @@ app.post('/process_form', function (request, response) {
             has_valid_quantity = has_valid_quantity && isNonNegInt(q);
         }
         // Makes data into strings
-        const stringified = query_string.stringify(POST);
+        const stringified = qs.stringify(POST);
            
-   let qty_obj = {"quantity": JSON.stringify(request.body.quantity)};
-   if(Object.keys(errors).length === 0) {
-      
-
-    //If data is valid, create invoice
-    response.redirect('./invoice.html?' + qs.stringify(qty_obj));
-   } else {
-    qty_obj.errors = JSON.stringify(errors);
-    response.redirect('./pointeshoes.html?' + qs.stringify(qty_obj));
-   }
         // If valid
         if (has_valid_quantity && has_quantity) {
             // Sends to invoice
