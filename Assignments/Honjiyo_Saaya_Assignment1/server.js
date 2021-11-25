@@ -1,5 +1,3 @@
-// From from Lab 13, screencast, uses npm express, querystring, and nodemon to run server
-
 // Pull data from product_data.js
 var products = require('./product_data.json');
 // Sets query_string to load
@@ -14,55 +12,73 @@ app.all('*', function (request, response, next) {
 });
 //Get request for products data
 
-app.get('/product_data.js', function (request, response) {
+// Uses data in body Lab14
+app.use(express.urlencoded({extended: true}));
+
+app.get('/product_data.js', function (request, response, next) {
     response.type('.js');
     var products_str = `var products = ${JSON.stringify(products)};`;
     response.send(products_str);
 });
 
-// Uses data in body Lab14
-app.use(express.urlencoded({extended: true}));
-
 // post to invoice
-app.post('/process_form', function (request, response) {
+app.post('/process_form', function (request, response, next) {
     // Grabs body
-    let POST = request.body;
-    if (typeof POST['submit_purchase'] != 'undefined') {
-        var has_valid_quantity = true;
-        var has_quantity = false;
-        for (i = 0; i < products.length; i++) {
-            // Checks quantity
-            q = POST[`quantity${i}`];
-            // Greater than 0
-            has_quantity = has_quantity || q > 0;
-            // Greater than 0, and valid using nonnegint function
-            has_valid_quantity = has_valid_quantity && isNonNegInt(q);
+    var quantities = request.body["quantity"];
+    var errors = {};
+    let reqbody = request.body;
+    var has_quantities = false; //assume no quantities
+    // Check that quantities are non-negative integers
+    for (i in quantities) {
+        // check for quantities
+        if (isNonNegInt(quantities[i]) == false) {
+            errors['quantity_' + i] = `Please choose a valid quantity for ${products[i].name}`;
         }
-        // Makes data into strings
-        const stringified = qs.stringify(POST);
-           
-        // If valid
-        if (has_valid_quantity && has_quantity) {
-            // Sends to invoice
-            response.redirect("./invoice.html?" + stringified);
-            
-        } else {
-            // If not valid, sends back
-            response.redirect("./pointeshoes.html?" + stringified);
-            
+        // Check if any quanties were selected
+        if (quantities[i] > 0) {
+            has_quantities = true;
         }
-   }
+        // Check if quantity desired is avaialble
+        if (quantities[i] > products[i].quantity_available) {
+            errors['available_' + i] = `We don't have ${(quantities[i])} ${products[i].name} available.`;
+        }
+    }
+        // Check if quantity is selected
+        if (!has_quantities) {
+            errors['no_quantities'] = `Please select some items!`;
+         }
+
+
+    let qty_obj = { "quantity": JSON.stringify(request.body["quantity"]) };
+    // console.log(Object.keys(errors));
+    //ask if the object is empty or not
+    if (Object.keys(errors).length == 0) {
+        // remove from inventory quantities
+        for(i in products){
+        products[i].quantity_available -= Number(reqbody[`quantities${i}`]);
+        }
+        response.redirect('./invoice.html?' + qs.stringify(qty_obj));
+    } else { //if i have errors, take the errors and go back to pointeshoes.html
+        let errs_obj = { "errors": JSON.stringify(errors) };
+        console.log(qs.stringify(qty_obj));
+        response.redirect('./pointeshoes.html?' + qs.stringify(qty_obj) + '&' + qs.stringify(errs_obj));
+    }
+
 });
 
 
-// From lab 12
-function isNonNegInt(q, return_errors = false) { //check if values are postitive, integer, whole values 
-    errors = []; // assume no errors at first
-    if (q == '') q = 0; //sets input quatity as 0 
-    if (Number(q) != q) errors.push(' <b>This is not a number!</b>'); // Check if string is a number value
-    else if (q < 0) errors.push('<b>Negative value!</b>'); // Check if it is non-negative
-    else if (parseInt(q) != q) errors.push('<b>This is not a full value!</b>'); // Check that it is an integer
-    return return_errors ? errors : (errors.length == 0);
+
+
+// process purchase request (validate quantities, check quantity available)
+// codes are referenced from info_server_Ex5.js
+function isNonNegInt(q, returnErrors = false) {
+    errors = []; // assume no errors
+    if (q == '') q = 0  //blank means 0
+    if (Number(q) != q) errors.push('<font color="red">Not a number</font>'); //check if value is a number
+    if (q < 0) errors.push('<font color="red">Negative value</font>'); // Check if it is non-negative
+    if (parseInt(q) != q) errors.push('<font color="red">Not an integer</font>'); // Check if it is an integer
+
+    return returnErrors ? errors : (errors.length == 0);
 }
 
 
@@ -72,4 +88,3 @@ app.use(express.static('./public'));
 // Server start, listening to port 8080
 app.listen(8080,() => console.log(`listening on port 8080`));
     
- // note the use of an anonymous function here

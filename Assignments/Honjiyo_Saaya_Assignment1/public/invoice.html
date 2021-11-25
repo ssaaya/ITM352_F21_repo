@@ -5,20 +5,15 @@
     let params = (new URL(document.location)).searchParams;
 // Allows form submission, checks quantities from form, quantities put into array
 var quantities = [];
-    if (params.has('submit_purchase')) {
-        for (i = 0; i < products.length; i++) {
-            if (params.has(`quantity${i}`)) {
-                a_qty = params.get(`quantity${i}`);
-                quantities[i] = a_qty;
-            }
-        }
-    } else {
+if (params.has('quantity')) {
+    quantities = JSON.parse(params.get(`quantity`));//turns JSON in array
+  }
+   else {
         // Form error, quantity inputed is wrong
         (document.write('No form was submitted! Please make a purchase.'));
     }
     // Prints quantities
     console.log(quantities);
-</script>
 </script>
 
 <!DOCTYPE html>
