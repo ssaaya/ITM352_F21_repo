@@ -1,0 +1,44 @@
+/* Saaya Honjiyo
+11/30/21
+CSS for invoice.html*/
+/*body*/
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  background-color: rgb(247, 251, 230);
+  font-family: 'Abril Fatface', cursive;
+}
+/*font style*/
+a{
+  text-decoration: none;
+  color: #989473;
+}
+p{
+  color: #989473;
+}
+h1{
+  color: #5d5a43;
+}
+h2{
+  color:#5d5a43;
+}
+/*buttons*/
+.button {
+  font-family: 'Abril Fatface', cursive;
+  background-color: #384e2d;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 11px;
+  border: none;
+  width: 150px; 
+  height: 30px;
+  margin-left:100px;
+  margin-right: 100px;
+  position: sticky;
+}
+
+.button:hover {
+  background-color: #788d7c
+}

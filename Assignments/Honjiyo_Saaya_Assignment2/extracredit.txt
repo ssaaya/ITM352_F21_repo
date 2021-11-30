@@ -1,0 +1,5 @@
+1. Would it be better to store and access user data using a database? Explain the pros and cons of this. Using this list, what is best for this particular application and why?
+    It depends on what your use case is. A database is a seperate software that makes accessing data easier compared to a JSON file which can become fairly large and difficult to read over time, which is one of the pros of a database. A con would be that it would be more difficult to develop rather than a JSON file. For this application, it would be best to use a database if it were to be released into the public. A JSON file can be easily lost and databases have better protection.
+
+2. Explain how a user could defeat your security scheme and gain access to your main application page without having to log in.
+    Hackers have many differnt tools today. If your data and connection to the server is not encrypted, all of the actions and requests that are being sent to the server can be captured easily. 
