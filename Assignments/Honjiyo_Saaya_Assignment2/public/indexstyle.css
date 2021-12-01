@@ -8,6 +8,7 @@
 /*font style*/
 body{
     font-family: 'Abril Fatface', cursive;
+    background-color: rgb(230, 221, 204);
 }
 /* to format navbar*/
 .navbar{

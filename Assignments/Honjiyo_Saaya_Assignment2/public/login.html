@@ -1,8 +1,12 @@
-<!--modified from w3 schools template-->
+<!--Saaya Honjiyo
+Due 11/30/21
+Dr. Port
+-->
 <script src="/Honjiyo_Saaya_Assignment2/user_data.json" type=json></script>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <script>
     //script to let users know if username or password is wrong
@@ -24,9 +28,38 @@
 </head>
 
 <body>
-<h1>Login</h1>
+  <h1>Login</h1>
   <div class="imgcontainer">
     <style>
+      /* to format navbar*/
+      .navbar {
+        display: flex;
+        align-items: center;
+        padding: 20;
+      }
+
+      nav {
+        flex: 1;
+        text-align: right;
+      }
+
+      nav ul {
+        display: inline-block;
+        list-style-type: none;
+      }
+
+      nav ul li {
+        display: inline-block;
+        margin-right: 20px;
+      }
+
+      /*anchor*/
+      a {
+        text-decoration: none;
+        color: #989473;
+      }
+
+      /*modified from w3schools template*/
       aside {
         display: flex;
         align-items: stretch;
@@ -37,15 +70,19 @@
       /* body style */
       body {
         font-family: 'Abril Fatface', cursive;
-        background-color: lightgoldenrodyellow;
+        background-color: rgb(230, 221, 204);
       }
+
       /*font colors */
-      h1{
+      h1,
+      p {
         color: rgb(38, 80, 46);
       }
-      label{
+
+      label {
         color: rgb(53, 73, 45);
       }
+
       /* form border */
       form {
         border: 3px solid #1a2d1c;
@@ -54,6 +91,8 @@
       /* input style */
       input[type=text],
       input[type=password] {
+        font-family: 'Abril Fatface', cursive;
+        text-align: center;
         width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
@@ -61,14 +100,16 @@
         border: 1px solid #ccc;
         box-sizing: border-box;
       }
-        /* a href highlight color */
+
+      /* a href highlight color */
       a {
-      color: rgb(18, 73, 20);
+        color: rgb(18, 73, 20);
       }
-      
-      /* style for all buttons */
+
+      /* style for log btn */
       button {
-        background-color: #4CAF50;
+        font-family: 'Abril Fatface', cursive;
+        background-color: #46672d;
         color: white;
         padding: 14px 20px;
         margin: 8px 0;
@@ -81,42 +122,64 @@
       button:hover {
         opacity: 0.8;
       }
+
       /*style for cancel order btn*/
       .cancelbtn {
+        font-family: 'Abril Fatface', cursive;
         width: auto;
         padding: 10px 18px;
-        background-color: #72aa73;
+        background-color: #46672d;
         width: 100%;
-        color: red;
+        color: black;
+        cursor: pointer;
+      }
+
+      .cancelbtn:hover {
+        opacity: 0.8;
       }
 
       /* Add padding to containers */
       .container {
         padding: 16px;
       }
-      
     </style>
-    <form action="/process_login" method="POST" name="login_form">
+    <!--- logo and navbar --->
+    <div class="header">
       <div class="container">
-        <label for="username"><b>Username</b></label>
-        <input id="usernameid" type="text" placeholder="Enter Username" name="username"
-          onchange='this.value=this.value.toLowerCase();' required>
+        <div class="navbar">
+          <div class="logo">
+            <img src="./images/logo.png" width="125px">
+          </div>
+          <nav>
+            <ul>
+              <li><a href="./index.html">Home</a></li>
+              <li><a href="./products_display.html">Pointe Shoes</a></li>
+            </ul>
+          </nav>
+        </div>
+        <!--register form-->
+        <form action="/process_login" method="POST" name="login_form">
+          <center>
+            <div class="container">
+              <label for="username"><b>Username</b></label>
+              <input id="usernameid" type="text" placeholder="Enter Username" name="username"
+                onchange='this.value=this.value.toLowerCase();' required>
 
-        <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required>
+              <label for="password"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="password" required>
 
-        <button class="log-in" type="submit" value="Login" name="login"> Login </button>
+              <button class="log-in" type="submit" value="Login" name="login"> Login </button>
 
-        <input type="button" onClick="location.href='index.html'" class="cancelbtn" value='Cancel order'>
-      </div>
-
-      <div>
-        <script>
-          // if customer does not have a account yet click Sign Up Now to register and redirect to register page.
-          document.write(`<p><center>Are you a new customer? Click here to create an account and find the perfect pointe shoe today.<a href="./register.html${location.search}"> Sign Up Now!</a></p></center>`);
-        </script>
-      </div>
-    </form>
+              <input type="button" onClick="location.href='index.html'" class="cancelbtn" value='Cancel order'>
+            </div>
+          </center>
+          <div>
+            <script>
+              // if customer does not have a account yet click Sign Up Now to register and redirect to register page.
+              document.write(`<p><center>Are you a new customer? Click here to create an account and find the perfect pointe shoe today.<a href="./register.html${location.search}"> Sign Up Now!</a></p></center>`);
+            </script>
+          </div>
+        </form>
 </body>
 
 </html>

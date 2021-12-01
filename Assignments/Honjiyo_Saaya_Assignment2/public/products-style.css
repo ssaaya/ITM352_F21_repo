@@ -1,11 +1,11 @@
 /* Saaya Honjiyo
 11/30/21
+Dr. Port
 CSS for products_display.html */
 /* modified from assignment1 example products-style.css*/
 
-html {
-  
-  background-color: #b5c2ae;
+html { 
+  background-color: rgb(230, 221, 204);
   font-size: 10px;
 }
 
@@ -139,13 +139,13 @@ section p {
 
 
 .item {
-  background-size: 244px 24px;
+  background-size: 300px 24px;
 }
 
 
 .item img {
     width: 215px;
-    height: 215px; 
+    height: 300px; 
     
     display: inline;
     position:inherit;

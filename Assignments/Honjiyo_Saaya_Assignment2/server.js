@@ -2,20 +2,18 @@
 Due 11/30/21
 Dr. Port
 */
-//added on to my Assignment 1 server and borrowed code from w3resource, and W3school, Lab 14, assignment 2 code examples ,and Dr. Port's screencast//
-//Borrowed from Lab 13
+//from Lab 13
 var express = require('express');
 var app = express();
 var myParser = require("body-parser");
-// get products.js
-var data = require('./public/products.js');
+// pull products.js data
+var data = require('./products.js');
 var products = data.products;
-// loads starts up fs system actions
+// reads user data
 var fs = require('fs');
-//set filename equal to user data.json
 var filename = './user_data.json';
 //set how many products quantities we have in stock
-products.forEach((prod, i) => { prod.inventory = 100; });
+products.forEach((prod, i) => { prod.inventory = 50 });
 var querystring = require("querystring");
 // used to store quantity data from products disiplay page
 var temp_qty_data = {};
@@ -23,30 +21,21 @@ var temp_qty_data = {};
 // Routing 
 
 //to monitor all requests
-//took from Lab 13
 app.all('*', function (request, response, next) {
   console.log(request.method + ' to ' + request.path);
   next();
 });
-//modified from Lab 13, from assignment 1
+//from lab 13 ex 3
 app.use(express.urlencoded({ extended: true }));
-// Use get request to convert products.js to json
+// get request for products.js data
 app.get('/products.js', function (request, response, next) {
   response.type('.js');
   var products_str = `var products = ${JSON.stringify(products)};`; //creates string from variable
   response.send(products_str);
 });
-// modified from Lab 12 order_page.html
-function isNonNegInt(q, return_errors = false) {
-  errors = []; // assume no errors at first
-  if (q == '') q = 0; // handle blank inputs as if they are 0
-  if (Number(q) != q) errors.push('<font color="red">Not a number!</font>'); // Check if string is a number value
-  if (q < 0) errors.push('<font color="red">Negative value!</font>'); // Check if it is non-negative
-  if (parseInt(q) != q) errors.push('<font color="red">Not an integer!</font>'); // Check that it is an integer
-  return return_errors ? errors : (errors.length == 0);
-}
+
 //from Lab 14 
-//check if the user already exists in the server or not
+//to check if the user already exists in the server or not
 if (fs.existsSync(filename)) {
   var data = fs.readFileSync(filename, 'utf-8');
   var user_data = JSON.parse(data);
@@ -56,47 +45,19 @@ if (fs.existsSync(filename)) {
 }
 
 
-// login section//
-app.post("/process_login", function (req, res) {
-  // process post request from login form and redirect to invoice if ok, back to login page if not
-  var the_username = req.body.username.toLowerCase(); // requires username in lowercase
 
-  if (typeof user_data[the_username] != 'undefined') { 
-    if (user_data[the_username].password == req.body.password) {
-      // add the stored quanity data into the query
-      //add username to query to know who is logged in
-      temp_qty_data['username'] = the_username;
-      temp_qty_data['email'] = user_data[the_username].email;
-      let params = new URLSearchParams(temp_qty_data); 
-      res.redirect('/invoice.html?' + params.toString());//if login is ok, send to invoice page with the username and email to the string
-      return;
-
-    } else { //if the password has error, push error message
-      req.query.username = the_username;
-      req.query.LoginError = 'Invalid Password';
-    }
-  } else { //if the username has error, push error message
-    req.query.LoginError = 'Invalid Username';
-
-  }
-  params = new URLSearchParams(req.query);
-  res.redirect('./login.html?' + params.toString());//redirect to login page if there is a error
-});
-
-
-// registration section //
+// registration and login-- check/validation help from https://www.formget.com/form-validation-using-javascript/  https://www.w3resource.com/javascript/form/email-validation.php  //
+// *registration section* //
 app.post("/process_register", function (req, res) {
   console.log(req.body);
   // assume no errors from start, so set no register errors 
   var reg_errors = {};
 
-  var reg_username = req.body.username.toLowerCase(); //requires username to be in lowercase
-
   // VALIDATION - full name//
   if (/^[A-Za-z, ]+$/.test(req.body.fullname)) { //check if full name is inputted correctly- only letters
   }
   else {
-    reg_errors['fullname'] = 'Only Letters allowed for Full Name (Ex. Jane Doe)';// pop up in case an error
+    reg_errors['fullname'] = 'Only letters can be inputted into Full Name. (Ex. Jane Doe)';// pop up in case an error
   }
 
   if (req.body.fullname.length > 30 && req.body.fullname.length < 1) { //check if the characters is less than 1 or greater than 30
@@ -104,8 +65,10 @@ app.post("/process_register", function (req, res) {
   }
 
   // VALIDATION- username //
+  var reg_username = req.body.username.toLowerCase(); //requires username to be in lowercase
+
   if (req.body.username.length > 10 || req.body.username.length < 4) { //check if the length of username is less than 4 characters or greater than 10
-    reg_errors['username'] = 'Minimum of 4 characters and maximum of 10 characters';// if enter invalid length push error message
+    reg_errors['username'] = 'A minimum of 4 characters and maximum of 10 characters can be inputted for your username.';// if enter invalid length push error message
   }
 
   if (typeof user_data[reg_username] != 'undefined') { //check if the username is taken or not
@@ -124,11 +87,10 @@ app.post("/process_register", function (req, res) {
   }
 
   // VALIDATION-- email//
-  // email limitation function source- https://www.w3resource.com/javascript/form/email-validation.php)
   if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(req.body.email)) {// Email only allows certain character for x@y.z
   }
   else {
-    reg_errors['email'] = 'Please enter a valid email (Ex. username@mailserver.domain).';//otherwise, show this to the user
+    reg_errors['email'] = 'Please enter a valid email (Ex. user@mailserver.domain).';//otherwise, show this to the user
   }
 
   // VALIDATION-- password //
@@ -168,8 +130,45 @@ app.post("/process_register", function (req, res) {
   }
 });
 
+// *login section*//
+app.post("/process_login", function (req, res) {
+  // process post request from login form and redirect to invoice if ok, back to login page if not
+  var the_username = req.body.username.toLowerCase(); // requires username in lowercase
 
-// purchase process //
+  if (typeof user_data[the_username] != 'undefined') { 
+    if (user_data[the_username].password == req.body.password) {
+      // add the stored quanity data into the query and user name to see who is logged in
+      temp_qty_data['username'] = the_username;
+      temp_qty_data['email'] = user_data[the_username].email;
+      let params = new URLSearchParams(temp_qty_data); 
+      res.redirect('/invoice.html?' + params.toString());//if login is correct, send to invoice page with the username and email to the string
+      return;
+
+    } else { //if password invalid, push error message
+      req.query.username = the_username;
+      req.query.LoginError = 'Invalid Password';
+    }
+  } else { //if username invalid, push error message
+    req.query.LoginError = 'Username does not exist';
+
+  }
+  params = new URLSearchParams(req.query);
+  res.redirect('./login.html?' + params.toString());//redirect to login page if there is a error
+});
+
+// *purchase process* //
+
+// modified from Lab 12 order_page.html
+// checks if the string q is non neg int
+function isNonNegInt(q, return_errors = false) {
+  errors = []; // assume no errors at first
+  if (q == '') q = 0; // blank inputs=0
+  if (Number(q) != q) errors.push('<font color="red">Not a number!</font>'); // Check if string is a number value
+  if (q < 0) errors.push('<font color="red">Negative value!</font>'); // Check if it is non-negative
+  if (parseInt(q) != q) errors.push('<font color="red">Not an integer!</font>'); // Check that it is an integer
+  return return_errors ? errors : (errors.length == 0);
+}
+
 // process purchase request- validate quantities
 app.post("/process_form", function (req, res, next) {
   // check the quantity, if it is not valid, send it to the products display page in order to repurchase

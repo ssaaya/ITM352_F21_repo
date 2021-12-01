@@ -1,4 +1,7 @@
-<!--Borrowed and modified from WODs, Lab 14, Assignment1 and Assignment2 code examples, modified template from ww3schools.com-->
+<!--Saaya Honjiyo
+Due 11/30/21
+Dr. Port
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,55 +28,161 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registration page</title>
-  <link rel="stylesheet" href="register.css">
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
-  <form action="/process_register" method="POST" name="register">
+  <style>
+    /* to format navbar*/
+    .navbar {
+      display: flex;
+      align-items: center;
+      padding: 20;
+    }
+
+    nav {
+      flex: 1;
+      text-align: right;
+    }
+
+    nav ul {
+      display: inline-block;
+      list-style-type: none;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin-right: 20px;
+    }
+
+    /*anchor*/
+    a {
+      text-decoration: none;
+      color: #989473;
+    }
+
+    body {
+      font-family: 'Abril Fatface', cursive;
+      background-color: rgb(230, 221, 204);
+    }
+
+    h1,
+    label,
+    p {
+      color: rgb(53, 71, 36);
+    }
+
+    /* Full-width input fields */
+    input[type=text],
+    input[type=password] {
+      width: 100%;
+      text-align: center;
+      font-family: 'Abril Fatface', cursive;
+      padding: 15px, 15px, 15px, 15px;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+
+    .registerbtn {
+      font-family: 'Abril Fatface', cursive;
+      background-color: #27502c;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 10px;
+      border: none;
+      height: 20px;
+      width: 150px;
+      margin-left: 500px;
+      margin-right: 500px;
+      margin-top: 30px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #698b70
+    }
+
+    /* a href highlight color */
+    a {
+      color: rgb(18, 73, 20);
+    }
+
+    /* form border */
+    form {
+      border: 3px solid #1a2d1c;
+    }
+
+    /* Add padding to containers */
+    .container {
+      padding: 16px;
+    }
+  </style>
+  <!--- logo and navbar --->
+  <div class="header">
     <div class="container">
-      <h1>Register</h1>
-      <p>Please fill in this form to create an account.</p>
-      <hr>
+      <div class="navbar">
+        <div class="logo">
+          <img src="./images/logo.png" width="125px">
+        </div>
+        <nav>
+          <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./products_display.html">Pointe Shoes</a></li>
+          </ul>
+        </nav>
+      </div>
+    <!--register form-->
+      <form action="/process_register" method="POST" name="register">
+        <center>
+          <div class="container">
+            <h1>Register</h1>
+            <p>Please fill out this form to create an account. (Required fields*)</p>
+            <hr>
 
-      <label for="fullname" size="30"><b>Full Name</b></label>
-      <div id='fullname_error' style="color: red;"></div>
-      <input type="text" placeholder="Enter first and last name" class="form__input" name="fullname" id="fullname">
-
-
-      <label for="username"><b>Username</b></label>
-      <div id='username_error' style="color: red;"></div>
-      <input type="text" placeholder="Enter Username" class="form__input" name="username" id="username">
-
-
-      <label for="email"><b>Email</b></label>
-      <div id='email_error' style="color: red;"></div>
-      <input type="text" placeholder="Enter Email" name="email" id="email">
-
-
-      <label for="password"><b>Password</b></label>
-      <div id='password_error' style="color: red;"></div>
-      <input type="password" placeholder="Enter Password" class="form__input" name="password" id="password">
-
-
-
-      <label for="repeat_password"><b>Repeat Password</b></label>
-      <div id='repeat_password_error' style="color: red;"></div>
-      <input type="password" placeholder="Repeat Password" class="form__input" name="repeat_password"
-        id="repeat_password">
+            <label for="fullname" size="30"><b>Full Name*</b></label>
+            <div id='fullname_error' style="color: red;"></div>
+            <input type="text" placeholder="Enter first and last name" class="form__input" name="fullname"
+              id="fullname">
 
 
+            <label for="username"><b>Username*</b></label>
+            <div id='username_error' style="color: red;"></div>
+            <input type="text" placeholder="Enter Username" class="form__input" name="username" id="username">
 
-      <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 
-      <button type="submit" class="registerbtn">Register</button>
+            <label for="email"><b>Email*</b></label>
+            <div id='email_error' style="color: red;"></div>
+            <input type="text" placeholder="Enter Email" name="email" id="email">
 
-    </div>
 
-    <div class="container signin">
-      <p>Already have an account? <a href="login.html">Sign in</a>.</p>
-    </div>
-  </form>
+            <label for="password"><b>Password*</b></label>
+            <div id='password_error' style="color: red;"></div>
+            <input type="password" placeholder="Enter Password" class="form__input" name="password" id="password">
+
+
+
+            <label for="repeat_password"><b>Repeat Password*</b></label>
+            <div id='repeat_password_error' style="color: red;"></div>
+            <input type="password" placeholder="Repeat Password" class="form__input" name="repeat_password"
+              id="repeat_password">
+
+            <br>
+
+            <button type="submit" class="registerbtn">Register</button>
+
+          </div>
+          <div class="container signin">
+            <p>Already have an account? <a href="login.html">Sign in</a>.</p>
+          </div>
+        </center>
+      </form>
 </body>
 
 </html>
