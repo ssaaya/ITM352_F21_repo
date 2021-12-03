@@ -1,10 +1,13 @@
 var fs = require('fs');
 var express = require('express');
 var app = express();
-var cookieParser = require('cookie-parser');//makes cookie data appear from request
-app.use(cookieParser());
+//var cookieParser = require('cookie-parser');//makes cookie data appear from request
+//app.use(cookieParser());
+//no longer need cookie parser because express session uses cookies (session id cookie)
+var session = require('express-session'); 
+app.use(session({secret: "MySecretKey", resave: true, saveUninitialized: true})); //encrypt session id
 
-//route 
+//route cookies
 app.get('/set_cookie', function (request,response){
     //this sends a cookie to the requester
     response.cookie('name', 'Dan', { maxAge: 5*1000});//cookie modifies header for what response will be
@@ -16,6 +19,14 @@ app.get('/use_cookie', function (request,response){
     //response.send('welcome to the used cookie page <ur name>)
     response.send(`welcome to the cookie page ${request.cookies.name}`);
 });
+//route sessions
+app.get('/use_session', function (request,response){
+    //this will get the name of cookie from the requester and respond with a message
+    //response.cookie('name', 'Dan');
+    //response.send('welcome to the used cookie page <ur name>)
+    response.send(`welcome your session id is ${request.session.id}`);
+});
+
 //data from form will be decoded
 app.use(express.urlencoded({ extended: true }));
 
@@ -65,11 +76,10 @@ app.get("/login", function(request, response) {
 //Process login form
 app.post("/login", function(request, response) {
     // Redirect to logged in page if ok, back to login page if not
-    let login_username = request.body['username'];
-    let login_password = request.body['password'];
+    the_username = request.body['username'];
+    the_password = request.body['password'];
     //check if username exists, then check password entered matched password stored
-
-    if (typeof user_registration_info[login_username] != 'undefined') {
+    if (typeof user_registration_info[the_username] != 'undefined') {
         if (user_registration_info[login_username]["password"] == login_password) {
             response.send(`${login_username} is logged in`);
         } else {
