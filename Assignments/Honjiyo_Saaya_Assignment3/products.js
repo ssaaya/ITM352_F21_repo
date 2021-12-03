@@ -1,6 +1,6 @@
 /*Modified my Assignment 1  and borrowed code from WODs smartphoneproducts 3,and Prof. Port's screencast*/
 
-var products =
+var pointeshoes =
     [
         {
             "name": "BalanceEuropean",
@@ -26,6 +26,53 @@ var products =
             "name": "Serenade",
             "price": 99.99,
             "image": "serenade.png"
+        };
+var leotards = 
+        {
+            "name": "Hestia",
+            "price": 32.99,
+            "image": ,
+        },
+        {
+            "name": "Svetlana",
+            "price": 24.99,
+            "image": ,
+        }
+        {
+            "name": "Oksana",
+            "price": 49.99,
+            "image": ,
+        },
+var 
+        {
+            "name": ,
+            "price": ,
+            "image": ,
+        }
+        {
+            "name": ,
+            "price": ,
+            "image": ,
+        }
+        {
+            "name": ,
+            "price": ,
+            "image": ,
+        }
+        {
+            "name": ,
+            "price": ,
+            "image": ,
+        }
+        {
+            "name": ,
+            "price": ,
+            "image": ,
+        }
+        {
+            "name": ,
+            "price": ,
+            "image": ,
         }
     ];
 
