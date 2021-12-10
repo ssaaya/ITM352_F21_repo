@@ -125,9 +125,15 @@ app.post("/register", function (request, response) {
 
 
 app.get("/login", function (request, response) {
+    var welcome_str = 'Welcome! You need to log in.'
+    if (typeof request.cookies['username'] != 'undefined'){
+        welcome_str = `Welcome ${request.cookies.username}! You logged in last on ${request.session['last login']}`;
+    }
     // Give a simple login form
     str = `
 <body>
+${welcome_str}
+<br>
 <form action="" method="POST">
 <input type="text" name="username" size="40" placeholder="enter username" ><br />
 <input type="password" name="password" size="40" placeholder="enter password"><br />
@@ -149,9 +155,11 @@ app.post("/login", function (request, response) {
             if (typeof request.session['last login'] != 'undefined'){
                 var last_login = request.session['last login']
             } else {
+                
                 var last_login = request.session['last login'] = 'first time logging in '  
             }
             request.session['last login'] = new Date().toISOString() //put login date into session
+            response.cookie('username', login_username);
             response.send(`You last logged in ${last_login}`)
         }
         else {

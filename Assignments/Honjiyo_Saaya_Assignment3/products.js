@@ -1,7 +1,15 @@
-/*Modified my Assignment 1  and borrowed code from WODs smartphoneproducts 3,and Prof. Port's screencast*/
+/*Saaya Honjiyo
+Modified my Assignment 1  and borrowed code from WODs smartphoneproducts 3,and Prof. Port's screencast and assignment example 3*/
+var products = 
+[
+    {"type": "pointeshoes"},
+    {"type": "leotard"},
+    {"type": "accesories"},
+    {"type": "equipment"},
+];
 
 var pointeshoes =
-    [
+[
         {
             "name": "BalanceEuropean",
             "price": 89.99,
@@ -26,55 +34,62 @@ var pointeshoes =
             "name": "Serenade",
             "price": 99.99,
             "image": "serenade.png"
-        };
-var leotards = 
+        }
+];
+var leotard = 
+[
         {
             "name": "Hestia",
             "price": 32.99,
-            "image": ,
+            "image": "hestia.png"
         },
         {
             "name": "Svetlana",
             "price": 24.99,
-            "image": ,
-        }
+            "image": "svetlana.png"
+        },
         {
             "name": "Oksana",
             "price": 49.99,
-            "image": ,
+            "image": "oksana.png"
+        }
+];
+var accesories = 
+[
+        {
+            "name": "Rhinestone Hair Tie",
+            "price": 12.99,
+            "image": "hairtierhine.png"
         },
-var 
         {
-            "name": ,
-            "price": ,
-            "image": ,
-        }
+            "name": "Hair Tie and Pins",
+            "price": 4.99,
+            "image": "hairtiespins.png"
+        },
         {
-            "name": ,
-            "price": ,
-            "image": ,
+            "name": "Scrunchie",
+            "price": 3.99,
+            "image": "scrunchie.png"
         }
+];
+var equipment = 
+[
         {
-            "name": ,
-            "price": ,
-            "image": ,
-        }
+            "name": "Shoe Spray",
+            "price": 12.99,
+            "image": "shoespray.png"
+        },
         {
-            "name": ,
-            "price": ,
-            "image": ,
-        }
+            "name": "Foam Roller Set",
+            "price": 49.99,
+            "image": "foamrollerkit.png"
+        },
         {
-            "name": ,
-            "price": ,
-            "image": ,
+            "name": "Dance Bag",
+            "price": 79.99,
+            "image": "dancebag.png"
         }
-        {
-            "name": ,
-            "price": ,
-            "image": ,
-        }
-    ];
+];
 
 if (typeof exports != 'undefined') { // try to exports this file to server.js
     exports.products = products;

@@ -17,6 +17,43 @@ products.forEach((prod, i) => { prod.inventory = 50 });
 var querystring = require("querystring");
 // used to store quantity data from products disiplay page
 var temp_qty_data = {};
+//create session and cookies
+var session = require('express-session');
+const { type } = require('os');
+app.use(session({secret: "MySecretKey", resave: true, saveUninitialized: true}));
+//from assignment 3 example
+app.all('*', function (request, response, next) {
+  console.log(`Got a ${request.method} to path ${request.path}`);
+  // need to initialize an object to store the cart in the session. We do it when there is any request so that we don't have to check it exists anytime it's used
+  if(typeof request.session.cart == 'undefined') { request.session.cart = {}; } 
+  next();
+});
+app.post("/update_cart", function (request, response) {
+  console.log(request.body);
+  // replace cart in session with post 
+  request.session.cart = request.body.quantities;
+  response.redirect(request.get('Referrer'));
+});
+app.post("/get_cart", function (request, response) {
+  response.json(request.session.cart);
+});
+app.post("/remove_item", function (request, response) {
+  console.log(request.query);
+  // update cart with pkey and index 
+  request.session.cart[request.query.pkey][request.query.index] = 0;
+  console.log(request.session.cart);
+  response.json({"msg":"removed"});
+});
+app.get("/add_to_cart", function (request, response) {
+  var params=request.query;
+  console.log(params);
+  var prod_key = params['products_key'];
+  var quantities = params['quantities'];
+  // add to session to save in cart
+  request.session.cart[prod_key] = quantities;
+  console.log(request.session.cart);
+  response.redirect(request.get('Referrer'));
+});
 
 // Routing 
 

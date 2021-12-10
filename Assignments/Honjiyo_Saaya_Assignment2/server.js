@@ -27,7 +27,7 @@ app.all('*', function (request, response, next) {
 });
 //from lab 13 ex 3
 app.use(express.urlencoded({ extended: true }));
-// get request for products.js data
+// get request for products.js data to convert into JSON
 app.get('/products.js', function (request, response, next) {
   response.type('.js');
   var products_str = `var products = ${JSON.stringify(products)};`; //creates string from variable

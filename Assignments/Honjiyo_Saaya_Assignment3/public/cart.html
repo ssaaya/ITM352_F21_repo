@@ -1,0 +1,45 @@
+<script src="./functions.js"></script> 
+
+<script> 
+var products_data;
+loadJSON('get_products_data', function(response) {
+        // Parsing JSON string into object
+        products_data = JSON.parse(response);
+});
+
+var cart_data;
+loadJSON('get_cart', function(response) {
+        // Parsing JSON string into object
+        cart_data = JSON.parse(response);
+});
+
+function remove_item(pkey, index) {
+    console.log(`remove_item?pkey=${pkey}&index=${index}`);
+    loadJSON(`remove_item?pkey=${pkey}&index=${index}`, function(response) {
+        // Parsing JSON string into object
+        response_msg = JSON.parse(response);
+        alert(response_msg['msg']);
+        location.reload();
+        
+});
+}
+</script>
+<form action="/update_cart" method="POST"> 
+<script> 
+
+order_str = 'Your order is:<br>';
+for(prod_key in cart_data) { 
+var products = products_data[prod_key];
+var quantities = cart_data[prod_key];
+
+// grab the quantities from the query string
+for (i in quantities) {
+    if(quantities[i] == 0) continue;
+    order_str += `<span onclick="remove_item('${prod_key}',${i})"><b>Remove</b></span> You want <input type="text" name="quantities[${prod_key}][${i}]" value="${quantities[i]}"> of ${products[i]['name']}<br>`;
+}
+
+} 
+document.write(order_str);
+</script>
+<input type="submit" value="Update Cart">
+</form>
