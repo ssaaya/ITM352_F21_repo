@@ -1,8 +1,8 @@
 <!--Saaya Honjiyo
-Due 11/30/21
+Due 12/14/21
 Dr. Port
 -->
-<script src="/Honjiyo_Saaya_Assignment2/user_data.json" type=json></script>
+<script src="/Honjiyo_Saaya_Assignment3/user_data.json" type=json></script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +23,7 @@ Dr. Port
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="indexstyle.css">
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
   <title>Login Page</title>
 </head>
@@ -31,28 +32,67 @@ Dr. Port
   <h1>Login</h1>
   <div class="imgcontainer">
     <style>
-      /* to format navbar*/
       .navbar {
-        display: flex;
-        align-items: center;
-        padding: 20;
-      }
-
-      nav {
-        flex: 1;
-        text-align: right;
-      }
-
-      nav ul {
-        display: inline-block;
-        list-style-type: none;
-      }
-
-      nav ul li {
-        display: inline-block;
-        margin-right: 20px;
-      }
-
+    overflow: hidden;
+    background-color: rgb(20, 35, 16);
+    font-family: 'Abril Fatface', cursive;
+  }
+  
+  .navbar a {
+    float: left;
+    font-size: 16px;
+    color: rgb(123, 147, 110);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  .dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+  
+  .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+    background-color: rgb(61, 85, 50);
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: rgb(45, 68, 28);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .show {
+    display: block;
+  }
       /*anchor*/
       a {
         text-decoration: none;
@@ -144,19 +184,21 @@ Dr. Port
       }
     </style>
     <!--- logo and navbar --->
-    <div class="header">
-      <div class="container">
-        <div class="navbar">
+<div class="header">
+  <div class="container">
+      <div class="navbar">
           <div class="logo">
-            <img src="./images/logo.png" width="125px">
+              <img src="./images/logo.png" width="125px">
           </div>
           <nav>
-            <ul>
-              <li><a href="./index.html">Home</a></li>
-              <li><a href="./products_display.html">Pointe Shoes</a></li>
-            </ul>
+              <ul>
+                  <li><a href="./index.html">Home</a></li>
+                  <li><a href="./products_display.html">Products</a></li>
+                  <li><a href="./register.html"><img src="./images/loginicon.png" width="40px" height="35px"></a></li>
+              </ul>
           </nav>
-        </div>
+      </div>
+
         <!--register form-->
         <form action="/process_login" method="POST" name="login_form">
           <center>
@@ -170,13 +212,13 @@ Dr. Port
 
               <button class="log-in" type="submit" value="Login" name="login"> Login </button>
 
-              <input type="button" onClick="location.href='index.html'" class="cancelbtn" value='Cancel order'>
+              <input type="button" onClick="location.href='index.html'" class="cancelbtn" value='Cancel login'>
             </div>
           </center>
           <div>
             <script>
               // if customer does not have a account yet click Sign Up Now to register and redirect to register page.
-              document.write(`<p><center>Are you a new customer? Click here to create an account and find the perfect pointe shoe today.<a href="./register.html${location.search}"> Sign Up Now!</a></p></center>`);
+              document.write(`<p><center>Are you a new customer? Click here to create an account and find your essential ballet needs.<a href="./register.html${location.search}"> Sign Up Now!</a></p></center>`);
             </script>
           </div>
         </form>

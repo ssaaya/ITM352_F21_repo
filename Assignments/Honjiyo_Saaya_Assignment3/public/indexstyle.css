@@ -10,25 +10,86 @@ body{
     font-family: 'Abril Fatface', cursive;
     background-color: rgb(230, 221, 204);
 }
-/* to format navbar*/
+/*mod from w3*/
 .navbar{
-    display: flex;
-    align-items: center;
-    padding: 20;
+  display: flex;
+  align-items: center;
+  padding: 20;
 }
 nav{
-    flex: 1;
-    text-align: right;
+  flex: 1;
+  text-align: right;
 }
 nav ul{
-    display: inline-block;
-    list-style-type: none;
+  display: inline-block;
+  list-style-type: none;
 }
 nav ul li{
-    display: inline-block;
-    margin-right: 20px;
+  display: inline-block;
+  margin-right: 20px;
 }
-/*anchor*/
+
+.navbar {
+    overflow: hidden;
+    background-color: rgb(20, 35, 16);
+    font-family: 'Abril Fatface', cursive;
+  }
+  
+  .navbar a {
+    float: left;
+    font-size: 16px;
+    color: rgb(123, 147, 110);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  .dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+  
+  .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+    background-color: rgb(61, 85, 50);
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: rgb(45, 68, 28);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .show {
+    display: block;
+  }/*anchor*/
 a{
     text-decoration: none;
     color: #989473;
@@ -39,6 +100,9 @@ p{
 }
 /*h1 font color*/
 h1{
+    color: #5d5a43;
+}
+h4{
     color: #5d5a43;
 }
 /*container formatting to center logo and navbar*/
