@@ -31,7 +31,40 @@ Dr. Port
 </head>
 
 <body>
-    <center><h5>Cart</h5></center>
+  <style>
+    /* style for log btn */
+    .button {
+        font-family: 'Abril Fatface', cursive;
+        background-color: #46672d;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      /* hover effect for buttons */
+      button:hover {
+        opacity: 0.8;
+      }
+
+      /*style for cancel order btn*/
+      .cancelbtn {
+        font-family: 'Abril Fatface', cursive;
+        width: auto;
+        padding: 10px 18px;
+        background-color: #46672d;
+        width: 100%;
+        color: black;
+        cursor: pointer;
+      }
+
+      .cancelbtn:hover {
+        opacity: 0.8;
+      }
+  </style>
+    <center><h1>Cart</h1></center>
     <table border="2" class="center">
         <!-- From different Invoice WOD versions, modified -->
                 <tbody>
@@ -44,23 +77,27 @@ Dr. Port
                     <script>
                     // Product quantities for customer purchase
                 subtotal = 0
+                total_qua = 0
+                for (let prod_key in shopping_cart) {
+                let products = myProducts[prod_key];
                 for (i = 0; i < products.length; i++) {
-                   if (quantities[i] > 0) {
-                      // Calculations for subtotal
-                      extended_price = quantities[i] * products[i]['price']
-                      subtotal += extended_price;
-                      // Prints customer order
-                      document.write(`
+                    let q = Number(shopping_cart[prod_key][`quantity${i}`]);
+                    if (q > 0) {
+                        // product row
+                        total_qua += Number(q); //convert string to number, in order to display number
+                        extended_price = q * products[i].price;
+                        subtotal += extended_price;
+                        document.write(`
                         <tr>
                           <td width="40%">${products[i]['name']}</td>
-                          <td align="center" width="10%">${quantities[i]}</td>
-                          <td width="20%">\$${products[i]['price']}</td>
+                          <td align="center" width="10%">${q}</td>
+                          <td width="20%">\$${products[i].price}</td>
                           <td width="20%">\$${extended_price}</td>
                         </tr>
                       `);
                     }
                 }
-        
+              }
                 // Tax, subtotal, shipping, and total referenced from invoice4
                 // Compute Sales Tax, using Hawaii tax rate
                 var tax_rate = 0.0443;
@@ -97,9 +134,11 @@ Dr. Port
               </tr>
             </tbody>
           </table>
+          <center>
         <form action="/confirm" method=POST>
-        <input type="submit" class="button2" value="Proceed to Purchase" onclick="location.href='invoice.html';">
-        <input type="button" class="button3" value="Continue Shopping" onclick="location.href='products_display.html';">
-</body>
+        <input type="submit" class="button" value="Proceed to Purchase" onclick="location.href='invoice.html';">
+        <input type="button" class="button" value="Continue Shopping" onclick="location.href='products_display.html';">
+        </center>
+      </body>
 
 </html>

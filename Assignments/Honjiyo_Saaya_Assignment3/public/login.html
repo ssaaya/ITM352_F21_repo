@@ -12,7 +12,7 @@ Dr. Port
     //script to let users know if username or password is wrong
     let params = (new URL(document.location)).searchParams;
     window.onload = function () {
-      if (params.has('LoginError')) {// if errors occurs, give alert
+      if (params.has('LoginError')) {// if errors send alert
         alert(params.get('LoginError'));
       }
       if (params.has('username')) {

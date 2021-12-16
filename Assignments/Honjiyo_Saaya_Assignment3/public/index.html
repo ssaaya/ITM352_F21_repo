@@ -1,7 +1,7 @@
 <!--from my assignment 1-->
 <!DOCTYPE html>
 <html lang="en">
-
+    <script src="./functions.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,6 +26,15 @@
                 </ul>
             </nav>
         </div>
+        <script>
+            //if user login, push welcome message
+            if (getCookie('login') != '') {
+                document.write(`<i div><a href="logout"></i><h5><b>Welcome @${getCookie('login')}. Click again to Logout</h5></b></a></div>`)
+            } else {
+                document.write(`<a href="login.html"><i class="fa fa-fw fa-user"></i> Login</a>`)
+
+            }
+        </script>
 <!--- webstore intro --->
             <div class="row">
                 <div class="column">

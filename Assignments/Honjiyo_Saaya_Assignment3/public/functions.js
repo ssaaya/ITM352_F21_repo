@@ -14,7 +14,7 @@ function loadJSON(service, callback) {
   };
   xobj.send(null);
 }
-//Function to get cookie
+// get cookie
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);

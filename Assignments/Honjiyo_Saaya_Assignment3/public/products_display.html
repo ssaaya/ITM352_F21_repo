@@ -11,7 +11,7 @@
 <script>
 
     let params = (new URL(document.location)).searchParams; //to get query string
-    var product_key = "Leotards";//first to show
+    var product_key = "Leotards";//first prods to show
     if (params.has('prod_key')) {
         product_key = params.get('prod_key');
     }
@@ -38,16 +38,14 @@ function isNonNegInt(q, return_errors = false) {
 
     //for redirecting page
     window.onload = function () {
-        let params = (new URL(document.location)).searchParams; // get form data inside params
-        // form submit requested, check if quantities are valid, redirect to invoice if valid.
         if (params.has('purchase_submit')) {
-            // if input is invalid, then push alert 
-            for (i = 0; i < products.length; i++) {
+            // check for errors in qtys , push alert 
+            for (i = 0; i < myProducts[product_key].length; i++) {
                 if (params.has(`quantity${i}`)) {
                     a_qty = params.get(`quantity${i}`);
-                    // make textboxes sticky
+                    // sticky text box
                     quantity_form[`quantity${i}`].value = a_qty;
-                    checkQuantityTextbox(quantity_form[`quantity${i}`]); // specify errors
+                    checkQuantityTextbox(quantity_form[`quantity${i}`]); // show specific error
                 }
             }
             // alert the user of errors if any, and specify the errors
@@ -71,10 +69,11 @@ function isNonNegInt(q, return_errors = false) {
     <meta charset="UTF-8">
     <title>Saaya's Ballet Essentials</title>
     <link href="products-style.css" rel="stylesheet">
+    <link rel="stylesheet" href="indexstyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
 </head>
 
-<body id="theBody">
+<body>
 
     <header>
         <h1>
@@ -82,6 +81,21 @@ function isNonNegInt(q, return_errors = false) {
         </h1>
 
     </header>
+<!--html navbar-->
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="./images/logo.png" width="125px">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./products_display.html">Products</a></li>
+                    <li><a href="./register.html">Log In</a></li>
+                </ul>
+            </nav>
+        </div>
 
     <div class="navbar">
 
@@ -97,7 +111,7 @@ function isNonNegInt(q, return_errors = false) {
         <script>
             //if user login, push welcome message
             if (getCookie('login') != '') {
-                document.write(`<i div><a href="logout"></i><h5><b>&#129305; Welcome @${getCookie('login')}. Click again to Logout</h5></b></a></div>`)
+                document.write(`<i div><a href="logout"></i><h5><b>Welcome @${getCookie('login')}. Click again to Logout</h5></b></a></div>`)
             } else {
                 document.write(`<a href="login.html"><i class="fa fa-fw fa-user"></i> Login</a>`)
 
@@ -114,10 +128,10 @@ function isNonNegInt(q, return_errors = false) {
                 <section class="item">
                     <h2>${myProducts[product_key][i].name}</h2>
                     <p>$${myProducts[product_key][i].price}</p>
-                    <label id="quantity${i}_label"}"> Quantity ~${myProducts[product_key][i].inventory}</label>
+                    <label id="quantity${i}_label"}"> Quantity~${myProducts[product_key][i].inventory}</label>
                     <input type="text" placeholder="Quantity" name="quantity${i}"
                     onkeyup="checkQuantityTextbox(this);">
-                    <img src="./Images/${myProducts[product_key][i].image}">
+                    <img src="./images/${myProducts[product_key][i].image}">
                 </section>
                 `)
                     }
